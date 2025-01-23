@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="patrolActivityOnClick"
+    tools:context=".locations.PatrolActivity">
+
+    <Button
+        android:id="@+id/patrolButtonReturn"
+        android:layout_width="240dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="patrolButtonReturnOnClick"
+        android:text="@string/Return"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gamesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="30dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolTextViewLocations" />
+
+    <TextView
+        android:id="@+id/patrolTextViewLocations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/patrol_locations"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/patrolButtonStartStop"
+        android:layout_width="516dp"
+        android:layout_height="152dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="patrolButtonStartStopOnClick"
+        android:text="@string/start_patrol"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+
+    <TextView
+        android:id="@+id/patrolTextViewLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/patrol_going_to"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/patrolTextViewLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/patrolTextViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:text="LOCATION (DIST)"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/patrolButtonStartStop"
+        app:layout_constraintEnd_toEndOf="@+id/patrolTextViewLocationLabel"
+        app:layout_constraintStart_toStartOf="@+id/patrolTextViewLocationLabel" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/patrolGroupGoingTo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:constraint_referenced_ids="patrolTextViewLocationLabel,patrolTextViewLocation"
+        app:layout_constraintBottom_toBottomOf="@+id/patrolTextViewLocation"
+        app:layout_constraintEnd_toEndOf="@+id/patrolTextViewLocation"
+        app:layout_constraintStart_toStartOf="@+id/patrolTextViewLocation"
+        app:layout_constraintTop_toTopOf="@+id/patrolTextViewLocationLabel" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

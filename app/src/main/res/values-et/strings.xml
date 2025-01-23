@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pihlakodu rakendus</string>
+    <string name="app_name_short">aire</string>
+
+    <string name="locations">Majajuht</string>
+    <string name="info">Info</string>
+    <string name="contact">Kontakt</string>
+    <string name="intro">Tutvustus</string>
+
+
+    <string name="support">Helista abitelefonile</string>
+    <string name="followme">Tänan, järgne mulle asukohani</string>
+    <string name="stop">Peatu</string>
+    <string name="start">Alusta</string>
+    <string name="stayclose">Püsi roboti ees</string>
+    <string name="arrival">Me oleme jõudnud kohta</string>
+    <string name="selectmenu">Palun valige menüüst</string>
+    <string name="start_now">Alusta navigeerimist</string>
+    <string name="navigating_to">Sihtkoht</string>
+
+
+    <string name="Charity">Ideekorje</string>
+    <string name="Offers">Tänane menüü</string>
+    <string name="Market">B2B Pakkumised</string>
+    <string name="Events">Sündmused</string>
+    <string name="Services">Teenused</string>
+    <string name="Secretary">Helista sekretärile</string>
+    <string name="Survey">Tagasiside</string>
+
+    <string name="Return">Tagasi</string>
+    <string name="Close">Sulgen...</string>
+
+    <string name="AssistantUnavailable">Sekretär ei saa hetkel vastu võtta.</string>
+    <string name="AssistantCalling">Helistan sekretärile, palun oota kuni 20 sekundit...</string>
+
+    <string name="Distance">Vahemaa: </string>
+    <string name="LocationArrived">Me oleme jõudnud kohta</string>
+
+    <string name="GreetWelcome">Tere! Võin ma teid aidata?</string>
+    <string name="GreetGoodbye">Head aega!</string>
+
+    <string name="ConferenceArrived">Minge treppidest üles et jõuda Konverentsikeskusesse.</string>
+
+    <string name="TakeTheLiftToFloor">Sõitke liftiga korrusele</string>
+    <string name="ToReachThe">et jõuda kohta</string>
+    <string name="TroughTheDoorAndToTheLeft">Mine läbi D ukse ja koridori lõpus mine vasakule, et jõuda kohta</string>
+    <string name="GoToReception">Palun pöördu retseptsiooni poole.</string>
+
+    <string name="LocationFollow">Palun järgne mulle!</string>
+
+    <string name="Reposing">Repositsioneerin, oota natuke...</string>
+
+    <string name="Remaining">Jäänud:</string>
+
+
+    <string name="videoButton">Promo-\nvideo</string>
+    <string name="feedbackButton">Tagasiside</string>
+    <string name="presentersButton">Esinejad</string>
+    <string name="scheduleButton">Ajakava</string>
+
+
+    <string name="thankyou">Aitäh!</string>
+
+    <string name="EventNavigation">Asukohad</string>
+    <string name="EventVideo">Roboti-\nralli</string>
+
+    <string name="Restaurant">Plus Kohvik menüü</string>
+
+
+    <string name="Scan">Analüüsi!</string>
+    <string name="ScanButton">Analüüsi</string>
+
+
+    <string name="scan">Skänneerimine.</string>
+    <string name="scanningfailed">Skänneerime ebaõnnestus.</string>
+
+    <string name="Guide">Majajuht</string>
+    <string name="VideoN">Treeningvideo</string>
+
+    <string name="Video">Treening-\nvideo</string>
+    <string name="News">Uudised</string>
+    <string name="Patrol">Ringisõit</string>
+    <string name="Game1">Arva vanust!</string>
+    <string name="Game2">Liitmismäng</string>
+
+    <string name="Hello">Tere</string>
+
+    <string name="ReminderWater">Ära unusta juua vett</string>
+
+    <string name="Repose">Repositsioneeri robot</string>
+
+    <string name="FlowerGame">Mängud</string>
+    <string name="FlowerGameN">Mängud</string>
+
+    <string name="ReposeInfo">Repositsioneerimine töötab paremini avara ruumi keskel</string>
+
+
+    <string name="face_recognized_0">Ära unusta vett juua!</string>
+    <string name="face_recognized_1">Soovin sulle imelist päeva!</string>
+    <string name="face_recognized_2">Kui tuju hea siis käsi kokku löö!</string>
+    <string name="face_recognized_3">Naerata mulle!</string>
+    <string name="face_recognized_4">Ilusat päeva sulle!</string>
+    <string name="face_recognized_5">Kuidas sul läheb?</string>
+
+    <string name="StopNewsRead">Peata lugemine</string>
+    <string name="StartNewsRead">Alusta lugemist</string>
+    <string name="patrol_locations">Ringisõidu peatuskohad</string>
+    <string name="start_patrol">Alusta ringisõitu</string>
+    <string name="start_patrol_stop">Peata ringisõit</string>
+    <string name="visit_locations_just_once">Külasta kõiki asukohtasi 1 kord</string>
+    <string name="use_message_on_arrival_to_patrol_location">Edasta sõnum jõudes sihtkohta</string>
+    <string name="use_message_on_person_detection_while_patrolling">Edasta sõnum kohtudes inimesega ringisõidu ajal</string>
+    <string name="pause_after_arrival_to_patrol_location_sec">Peatu igas sihtkohas (sekundid)</string>
+    <string name="repeat_message_after_every_sec">Korda sõnumit regulaarselt (sekundid)</string>
+
+    <string name="patrolEditTextRepeatMessage">Tere, mina olen robot!</string>
+    <string name="patrolEditTextRepeatMessageInterval">5</string>
+    <string name="patrolEditTextFaceDetectedMessage">Ära unusta vett juua!</string>
+    <string name="patrolEditTextArrivalMessage">Head päeva!</string>
+    <string name="patrolEditTextFaceDetectionCustomMessage">Head päeva Teile!</string>
+    <string name="patrolEditTextArrivalPauseDuration">5</string>
+    <string name="phrases_to_use_when_person_is_detected">Fraasid inimese tuvastamisel</string>
+    <string name="patrol_settings">Ringisõidu seaded</string>
+    <string name="patrol_going_to">Lähen asukohta</string>
+    <string name="close_app">Sulge rakendus</string>
+    <string name="sync_map_locations">Sünkroniseeri asukohad</string>
+    <string name="action_settings">Seaded</string>
+    <string name="menu">Menüü</string>
+    <string name="schedule">Ajakava</string>
+    <string name="show_menu_in_main_activity">Kuva nupp \'Menüü\' avaekraanil</string>
+    <string name="show_schedule_in_main_activity">Kuva nupp \'Ajakava\' avaekraanil</string>
+    <string name="article_not_found">Artiklit ei leitud</string>
+    <string name="news_next">Järgmine</string>
+    <string name="news_previous">Eelmine</string>
+    <string name="please_wait">Laeb...</string>
+    <string name="activation_phrase">Hei robot</string>
+    <string name="activation_phrase_title">Aktiveerimisfraas</string>
+    <string name="bigger_text">Suuremaks</string>
+    <string name="smaller_text">Väiksemaks</string>
+    <string name="register_face">Registreeri nägu</string>
+    <string name="show_face_registration_on_main_screen">Kuva nupp \'Registreeri nägu\' avaekraanil</string>
+    <string name="show_button_video_on_main_screen">Kuva nupp \'Video\' avaekraanil</string>
+    <string name="show_varia_button_in_main_screen">Kuva nupp \'Varia\' peaekraanil</string>
+    <string name="show_button_repose_on_main_screen">Kuva nupp \'Repositsioneeri\' avaekraanil</string>
+    <string name="check_rights">Õigused</string>
+    <string name="update">Uuenda</string>
+    <string name="take_a_picture">Tee pilt</string>
+    <string name="add">Lisa</string>
+    <string name="cancel">Katkesta</string>
+    <string name="face_registration_privacy">
+        " Privaatsus\n\n"
+        "Temis registreeritud näopildid konverteeritakse algoritmi poolt anonüümseks pildilt tuvastatud näo tunnusjoonte kogumiks.\n"
+        "Andmed on sõne/teksti kujul ja selle põhjal ei ole võimalik uuesti näo pilti taastada.\n"
+        "Isikuandmed salvestatakse ainult lokaalselt robotis ja kasutakse inimese tuvastamiseks kohapeal.\n"
+        "Originaal pilte ei salvestata ega kasutata mingil muul otstarbel.\n"
+    </string>
+    <string name="name">Nimi</string>
+    <string name="delete_user">Kustuta kasutaja...</string>
+    <string name="delete_user_info_for">Kustuta kasutaja</string>
+    <string name="delete">Kustuta</string>
+
+
+    <string name="privacy_dialog_title">Privaatsus ja näotuvastus</string>
+    <string name="privacy_dialog_message">
+        "Temis registreeritud näopildid konverteeritakse algoritmi poolt anonüümseks pildilt tuvastatud näo tunnusjoonte kogumiks.\n"
+        "Andmed on sõne/teksti kujul ja selle põhjal ei ole võimalik uuesti näo pilti taastada.\n"
+        "Isikuandmed salvestatakse ainult lokaalselt robotis ja kasutakse inimese tuvastamiseks kohapeal.\n"
+        "Originaal pilte ei salvestata ega kasutata mingil muul otstarbel.\n"
+    </string>
+    <string name="agree">JAH nõustun</string>
+    <string name="disagree">Sulge, EI nõustu</string>
+    <string name="robot_name_override">Roboti ID (jäta tühjaks automaattuvastuse kasutamiseks)</string>
+    <string name="map_name_override">Kaardi ID (jäta tühjaks automaattuvastuse kasutamiseks)</string>
+    <string name="personalize_face_detection_messages">Isikusta näotuvastussõnumid</string>
+    <string name="varia">Varia</string>
+    <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Kasuta seda fraasi</string>
+
+
+</resources>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFEFE"
+    android:backgroundTint="#FEFEFE"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/buttonLangEN"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:onClick="buttonENOnClick"
+        android:text="ENG"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLangEE"
+        app:layout_constraintTop_toTopOf="@+id/buttonLangEE" />
+
+
+    <Button
+        android:id="@+id/buttonGames"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="32dp"
+        android:onClick="buttonGamesOnClick"
+        android:text="@string/FlowerGame"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/buttonNews"
+        app:layout_constraintTop_toTopOf="@+id/buttonNews" />
+
+    <Button
+        android:id="@+id/reposeButton"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="48dp"
+        android:onClick="reposeButtonOnClick"
+        android:text="@string/Repose"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonVideo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="buttonVideoOnClick"
+        android:text="@string/Video"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/reposeButton"
+        app:layout_constraintEnd_toStartOf="@+id/reposeButton" />
+
+    <Button
+        android:id="@+id/buttonNews"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="32dp"
+        android:onClick="buttonNewsOnClick"
+        android:text="@string/News"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGuide"
+        app:layout_constraintStart_toEndOf="@+id/buttonGuide"
+        app:layout_constraintTop_toTopOf="@+id/buttonGuide" />
+
+    <Button
+        android:id="@+id/buttonPatrol"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:onClick="buttonPatrolOnClick"
+        android:text="@string/Patrol"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/buttonNews"
+        app:layout_constraintStart_toStartOf="@+id/buttonGuide"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGuide" />
+
+    <Button
+        android:id="@+id/buttonGuide"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="28dp"
+        android:onClick="buttonGuideOnClick"
+        android:text="@string/Guide"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="295dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pihlakodu2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="279dp"
+        android:layout_height="188dp"
+        android:layout_marginStart="-16dp"
+        android:layout_marginTop="-16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/taltech_logo" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="-8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:srcCompat="@drawable/aire_logo" />
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/eu_money" />
+
+    <Button
+        android:id="@+id/buttonLangEE"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="56dp"
+        android:onClick="buttonEEOnClick"
+        android:text="EST"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSettings"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:adjustViewBounds="true"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Settings"
+        android:onClick="imageButtonSettings"
+        android:scaleType="fitCenter"
+        android:src="@drawable/settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@drawable/settings" />
+
+    <Button
+        android:id="@+id/buttonArticle1"
+        android:layout_width="360dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="-16dp"
+        android:onClick="buttonArticle1OnClick"
+        android:text="@string/menu"
+        android:textSize="70sp"
+        app:layout_constraintStart_toEndOf="@+id/buttonGames"
+        app:layout_constraintTop_toTopOf="@+id/buttonGames" />
+
+    <Button
+        android:id="@+id/buttonArticle2"
+        android:layout_width="360dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:onClick="buttonArticle2OnClick"
+        android:text="@string/schedule"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonArticle1"
+        app:layout_constraintStart_toStartOf="@+id/buttonArticle1"
+        app:layout_constraintTop_toBottomOf="@+id/buttonArticle1" />
+
+    <Button
+        android:id="@+id/buttonArticle3"
+        android:layout_width="360dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:onClick="buttonArticle3OnClick"
+        android:text="@string/varia"
+        android:textSize="70sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonArticle2"
+        app:layout_constraintStart_toStartOf="@+id/buttonArticle2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonArticle2" />
+
+    <Button
+        android:id="@+id/buttonRegisterFace"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="buttonRegisterFaceOnClick"
+        android:text="@string/register_face"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonVideo"
+        app:layout_constraintTop_toTopOf="@+id/buttonVideo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

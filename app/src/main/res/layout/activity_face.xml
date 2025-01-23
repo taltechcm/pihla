@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutFace"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".face.FaceActivity">
+
+    <Button
+        android:id="@+id/buttonCloseFace"
+        android:layout_width="200sp"
+        android:layout_height="100sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="buttonCloseFaceOnClick"
+        android:text="@string/Return"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/face_button_takePicture"
+        android:layout_width="200dp"
+        android:layout_height="100sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:onClick="buttonFaceTakePictureOnClick"
+        android:text="@string/take_a_picture"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/face_imageView_photo"
+        android:layout_width="800dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Image"
+        app:layout_constraintDimensionRatio="h,4:3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/face_button_takePicture"
+        app:srcCompat="@drawable/pihlakodu" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/face_recyclerView_faces"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/face_imageView_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/face_imageView_photo"
+        app:layout_constraintTop_toTopOf="@+id/face_imageView_photo" />
+
+    <EditText
+        android:id="@+id/face_editText_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:text="Name"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/face_button_add"
+        app:layout_constraintEnd_toStartOf="@+id/face_button_add"
+        app:layout_constraintStart_toEndOf="@+id/face_button_takePicture"
+        app:layout_constraintTop_toTopOf="@+id/face_button_add" />
+
+    <Button
+        android:id="@+id/face_button_add"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:onClick="buttonAddOnclick"
+        android:text="@string/add"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/face_button_cancel"
+        app:layout_constraintEnd_toStartOf="@+id/face_button_cancel"
+        app:layout_constraintTop_toTopOf="@+id/face_button_cancel" />
+
+    <Button
+        android:id="@+id/face_button_cancel"
+        android:layout_width="200dp"
+        android:layout_height="80sp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="buttonCancelOnClick"
+        android:text="@string/cancel"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/face_imageView_photo"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCloseFace" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:singleLine="false"
+        android:text="@string/face_registration_privacy"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/face_recyclerView_faces"
+        app:layout_constraintStart_toStartOf="@+id/face_imageView_photo"
+        app:layout_constraintTop_toBottomOf="@+id/face_imageView_photo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

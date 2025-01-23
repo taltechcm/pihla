@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsActivity">
+
+    <Button
+        android:id="@+id/newsButtonReturn"
+        android:layout_width="240dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="newsButtonReturnOnClick"
+        android:text="@string/Return"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/newsTextViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="64dp"
+        android:text="Category"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/newsTextViewTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Title"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="@+id/newsTextViewDescription"
+        app:layout_constraintStart_toStartOf="@+id/newsTextViewCategory"
+        app:layout_constraintTop_toBottomOf="@+id/newsTextViewCategory" />
+
+    <TextView
+        android:id="@+id/newsTextViewDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="128dp"
+        android:text="Description"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/newsTextViewCategory"
+        app:layout_constraintTop_toBottomOf="@+id/newsTextViewTitle" />
+
+    <Button
+        android:id="@+id/newsButtonRead"
+        android:layout_width="660dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="64dp"
+        android:onClick="newsButtonReadOnClick"
+        android:text="@string/StopNewsRead"
+        android:textSize="68sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/newsButtonPrev"
+        android:layout_width="400dp"
+        android:layout_height="123dp"
+        android:layout_marginEnd="64dp"
+        android:onClick="newsButtonPrevOnClick"
+        android:text="@string/news_previous"
+        android:textSize="68sp"
+        app:layout_constraintEnd_toStartOf="@+id/newsButtonRead"
+        app:layout_constraintTop_toTopOf="@+id/newsButtonRead" />
+
+    <Button
+        android:id="@+id/newsButtonNext"
+        android:layout_width="400dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="64dp"
+        android:onClick="newsButtonNextOnClick"
+        android:text="@string/news_next"
+        android:textSize="68sp"
+        app:layout_constraintStart_toEndOf="@+id/newsButtonRead"
+        app:layout_constraintTop_toTopOf="@+id/newsButtonRead" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

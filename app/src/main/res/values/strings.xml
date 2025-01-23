@@ -1,0 +1,273 @@
+<resources>
+    <string name="app_name">Pihlakodu app</string>
+    <string name="app_name_short">aire</string>
+
+    <string name="locations">Locations</string>
+    <string name="info">Info</string>
+    <string name="contact">Contact</string>
+    <string name="intro">Intro</string>
+
+
+    <string name="support">Call Support</string>
+    <string name="followme">Okay, follow me to the location</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="stayclose">Stay in front of the robot</string>
+    <string name="arrival">We have arrived at location</string>
+    <string name="selectmenu">Please select from the menu</string>
+    <string name="start_now">Start navigating</string>
+    <string name="navigating_to">Navigating to</string>
+
+
+    <string name="Charity">Idea submittion</string>
+    <string name="Offers">Today\'s menu</string>
+    <string name="Market">B2B Offers</string>
+    <string name="Events">Events</string>
+    <string name="Services">Services</string>
+    <string name="Secretary">Call secretary</string>
+    <string name="Survey">Feedback</string>
+
+    <string name="Return">Return</string>
+    <string name="Close">Closing...</string>
+
+    <string name="AssistantUnavailable">Secretar unavailable right now.</string>
+    <string name="AssistantCalling">Calling secretary, please wait up to 20 seconds...</string>
+
+    <string name="Distance">Distance: </string>
+    <string name="LocationArrived">We have arrived at</string>
+
+    <string name="GreetWelcome">Hello! Can I help?</string>
+    <string name="GreetGoodbye">Bye!</string>
+
+    <string name="ConferenceArrived">Take the stairs to arrive at the Conference center.</string>
+
+    <string name="TakeTheLiftToFloor">Take the lift to</string>
+    <string name="ToReachThe">to reach the</string>
+    <string name="TroughTheDoorAndToTheLeft">Go trough the D-door, and at end of the corridor go left to reach the</string>
+    <string name="GoToReception">Please ask the reception.</string>
+
+
+    <string name="LocationFollow">Please follow me to the location!</string>
+
+    <string name="Reposing">Reposing, please wait...</string>
+
+    <string name="Remaining">Remaining:</string>
+
+
+    <string name="videoButton">Promo-\nvideo</string>
+    <string name="feedbackButton">Feedback</string>
+    <string name="presentersButton">Presenters</string>
+    <string name="scheduleButton">Schedule</string>
+
+
+    <string name="thankyou">Thank you!</string>
+
+
+    <string name="EventNavigation">Locations</string>
+    <string name="EventTeam" translatable="false">Creativity Matters</string>
+    <string name="EventVideo">Robot race</string>
+
+
+    <string name="Restaurant">Plus Cafe menu</string>
+
+
+    <string name="Scan">Analyze!</string>
+    <string name="ScanButton">Analyze</string>
+
+
+    <string name="scan">Scan.</string>
+    <string name="scanningfailed">Scanning failed.</string>
+
+    <string name="Guide">Navigation guide</string>
+    <string name="Video">Training video</string>
+    <string name="News">News</string>
+    <string name="VideoN">Training video</string>
+
+    <string name="Patrol">Tour</string>
+    <string name="Game1">Guess age!</string>
+    <string name="Game2">Addition game</string>
+
+    <string name="Hello">Hello</string>
+
+    <string name="ReminderWater">Don\'t forget to drink water</string>
+
+    <string name="Repose">Reposition robot</string>
+
+    <string name="FlowerGame">Games</string>
+    <string name="FlowerGameN">Games</string>
+
+
+    <string name="Greeting1" translatable="false">Ära unusta juua vett!</string>
+
+    <string name="Greeting2" translatable="false">Soovin imelist päeva!</string>
+    <string name="Greeting3" translatable="false">Kuju tuju hea siis käsi kokku löö!</string>
+    <string name="Greeting4" translatable="false">Naerata mulle!</string>
+    <string name="Greeting5" translatable="false">Ilusat päeva sulle!</string>
+    <string name="Greeting6" translatable="false">Kuidas sul läheb?</string>
+
+
+    <string name="ReposeInfo">Repose works best in the middle of an open area</string>
+
+    <string name="face_recognized_0">Don\'t forget to drink some water!</string>
+    <string name="face_recognized_1">Have a beautiful day!</string>
+    <string name="face_recognized_2">Smile and clap hands!</string>
+    <string name="face_recognized_3">Please smile to me!</string>
+    <string name="face_recognized_4">have a nice day!</string>
+    <string name="face_recognized_5">How is it going?</string>
+
+    <string name="StopNewsRead">Stop reading</string>
+    <string name="StartNewsRead">Start reading</string>
+    <string name="patrol_locations">Patrol stop locations</string>
+    <string name="start_patrol">Start Patrol</string>
+    <string name="start_patrol_stop">Stop Patrol</string>
+    <string name="visit_locations_just_once">Visit locations just once</string>
+    <string name="use_message_on_arrival_to_patrol_location">Use message on arrival to patrol location</string>
+    <string name="use_message_on_person_detection_while_patrolling">Use message on person detection while patrolling</string>
+    <string name="pause_after_arrival_to_patrol_location_sec">Pause after arrival to patrol location (sec)</string>
+    <string name="repeat_message_after_every_sec">Repeat message after every (sec)</string>
+
+    <string name="patrolEditTextRepeatMessage">Hello, I am a robot!</string>
+    <string name="patrolEditTextRepeatMessageInterval">5</string>
+    <string name="patrolEditTextFaceDetectedMessage">Drink some water!</string>
+    <string name="patrolEditTextArrivalMessage">Good day!</string>
+    <string name="patrolEditTextFaceDetectionCustomMessage">Good day!</string>
+    <string name="patrolEditTextArrivalPauseDuration">5</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="phrases_to_use_when_person_is_detected">Phrases to use when person is detected</string>
+    <string name="patrol_settings">Patrol settings</string>
+    <string name="patrol_going_to">Going to</string>
+    <string name="close_app">Close App</string>
+    <string name="sync_map_locations">Sync locations</string>
+    <string name="menu">Menu</string>
+    <string name="schedule">Schedule</string>
+    <string name="show_menu_in_main_activity">Show \'Menu\' button in main screen</string>
+    <string name="show_schedule_in_main_activity">Show \'Schedule\' button in main screen</string>
+    <string name="article_not_found">Article not found</string>
+    <string name="news_next">Next</string>
+    <string name="news_previous">Previous</string>
+    <string name="please_wait">Loading...</string>
+    <string name="activation_phrase">Hei robot</string>
+    <string name="activation_phrase_title">Activation phrase</string>
+    <string name="bigger_text">Bigger</string>
+    <string name="smaller_text">Smaller</string>
+    <string name="register_face">Register Face</string>
+    <string name="show_face_registration_on_main_screen">Show Face Registration on main screen</string>
+    <string name="check_rights">Check rights</string>
+    <string name="update">Update</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="face_registration_privacy">
+        "Privacy\n\n"
+        "Faces registered to temi will be converted by algorithm and stored as anonymous face feature data. This data is a pure string and cannot be reverted back to the image. Also the data will not leave the robot at any time, as it is only used locally when your app starts face recognition. The images will not be saved or used for other purpose."
+    </string>
+    <string name="name">Name</string>
+
+    <string name="delete_user">Delete user...</string>
+    <string name="delete_user_info_for">Delete user info for</string>
+    <string name="delete">Delete</string>
+
+    <string name="privacy_dialog_title">Privacy Notice</string>
+    <string name="privacy_dialog_message">This feature uses your device\'s camera to capture and process facial images. Your privacy and data security are important to us. Do you agree to allow camera access?</string>
+    <string name="agree">I Agree</string>
+    <string name="disagree">I Disagree</string>
+    <string name="robot_name_override">Robot name (leave empty for system name)</string>
+    <string name="map_name_override">Map name (leave empty for system name)</string>
+    <string name="personalize_face_detection_messages">Personalize face detection messages</string>
+    <string name="show_button_video_on_main_screen">Show button Video on main screen</string>
+    <string name="show_button_repose_on_main_screen">Show button Repose on main screen</string>
+    <string name="varia">Varia</string>
+    <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Use custom message</string>
+    <string name="show_varia_button_in_main_screen">Show \'Varia\' button in main screen</string>
+
+</resources>

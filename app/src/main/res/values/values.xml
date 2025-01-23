@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="patrolCheckBoxSingleRun">true</bool>
+    <bool name="patrolCheckBoxUseRepeatMessage">true</bool>
+    <bool name="patrolCheckBoxUseFaceDetection">true</bool>
+    <bool name="patrolCheckBoxUseArrivalMessage">true</bool>
+    <bool name="patrolCheckBoxUsePauseAfterArrival">true</bool>
+    <bool name="patrolCheckBoxUseFaceDetectionCustomMessage">true</bool>
+
+
+    <bool name="mainActivityButtonArticle1Visible">true</bool>
+    <bool name="mainActivityButtonArticle2Visible">true</bool>
+    <bool name="mainActivityButtonArticle3Visible">true</bool>
+
+    <bool name="mainActivityDisplayFaceReg">true</bool>
+    <bool name="personalizeFaceDetectionMessages">false</bool>
+    <bool name="mainActivityDisplayButtonVideo">false</bool>
+    <bool name="mainActivityDisplayButtonRepose">false</bool>
+</resources>

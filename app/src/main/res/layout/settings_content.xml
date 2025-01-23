@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/settingsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+
+    <Button
+        android:id="@+id/settingsCloseAppButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="settingsCloseAppButtonOnClick"
+        android:text="@string/close_app"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonSyncLocations"
+        android:layout_width="426dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="buttonSettingsSyncLocationsOnClick"
+        android:text="@string/sync_map_locations"
+        android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/settingsCloseAppButton"
+        app:layout_constraintTop_toTopOf="@+id/settingsCloseAppButton" />
+
+    <Button
+        android:id="@+id/settingsButtonRights"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="settingsButtonRightsOnClick"
+        android:text="@string/check_rights"
+        android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/buttonSyncLocations"
+        app:layout_constraintTop_toTopOf="@+id/buttonSyncLocations" />
+
+    <Button
+        android:id="@+id/settingsButtonFaceReg"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="settingsButtonFaceRegOnClick"
+        android:text="@string/register_face"
+        android:textSize="34sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/patrol_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsButtonFaceReg" />
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxSingleRun"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+
+        android:text="@string/visit_locations_just_once"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxUseRepeatMessage"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/repeat_message_after_every_sec"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxSingleRun" />
+
+    <EditText
+        android:id="@+id/patrolEditTextRepeatMessage"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/patrolEditTextRepeatMessage"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxUseRepeatMessage" />
+
+    <EditText
+        android:id="@+id/patrolEditTextRepeatMessageInterval"
+        style="@style/TextField"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="5"
+
+        app:layout_constraintBottom_toBottomOf="@+id/patrolCheckBoxUseRepeatMessage"
+        app:layout_constraintStart_toEndOf="@+id/patrolCheckBoxUseRepeatMessage" />
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxUseFaceDetection"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/use_message_on_person_detection_while_patrolling"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolEditTextRepeatMessage" />
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxUseFaceDetectionCustomMessage"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/patrolCheckBoxUseFaceDetectionCustomMessage"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxUseFaceDetection" />
+
+
+    <EditText
+        android:id="@+id/patrolEditTextFaceDetectionCustomMessage"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/patrolEditTextFaceDetectionCustomMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/patrolCheckBoxUseFaceDetectionCustomMessage"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxUseFaceDetectionCustomMessage"
+        tools:ignore="LabelFor" />
+
+
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxUseArrivalMessage"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/use_message_on_arrival_to_patrol_location"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolEditTextFaceDetectionCustomMessage" />
+
+    <EditText
+        android:id="@+id/patrolEditTextArrivalMessage"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/patrolEditTextArrivalMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/patrolCheckBoxUseArrivalMessage"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxUseArrivalMessage"
+        tools:ignore="LabelFor" />
+
+    <CheckBox
+        android:id="@+id/patrolCheckBoxUsePauseAfterArrival"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/pause_after_arrival_to_patrol_location_sec"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolEditTextArrivalMessage" />
+
+    <EditText
+        android:id="@+id/patrolEditTextArrivalPauseDuration"
+        style="@style/TextField"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="5"
+
+        app:layout_constraintBottom_toBottomOf="@+id/patrolCheckBoxUsePauseAfterArrival"
+        app:layout_constraintStart_toEndOf="@+id/patrolCheckBoxUsePauseAfterArrival" />
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patrolCheckBoxUsePauseAfterArrival" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/phrases_to_use_when_person_is_detected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
+    <EditText
+        android:id="@+id/faceDetectionPhrase0"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/face_recognized_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="LabelFor" />
+
+
+    <EditText
+        android:id="@+id/faceDetectionPhrase1"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/face_recognized_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/faceDetectionPhrase0"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/faceDetectionPhrase2"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/face_recognized_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/faceDetectionPhrase1"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/faceDetectionPhrase3"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/face_recognized_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/faceDetectionPhrase2"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/faceDetectionPhrase4"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/face_recognized_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/faceDetectionPhrase3"
+        tools:ignore="LabelFor" />
+
+    <CheckBox
+        android:id="@+id/personalizeFaceDetectionMessages"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/personalize_face_detection_messages"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/faceDetectionPhrase4" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/personalizeFaceDetectionMessages" />
+
+    <CheckBox
+        android:id="@+id/mainActivityButtonArticle1Visible"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_menu_in_main_activity"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+
+    <CheckBox
+        android:id="@+id/mainActivityButtonArticle2Visible"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_schedule_in_main_activity"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityButtonArticle1Visible" />
+
+    <CheckBox
+        android:id="@+id/mainActivityButtonArticle3Visible"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_varia_button_in_main_screen"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityButtonArticle2Visible" />
+
+
+    <CheckBox
+        android:id="@+id/mainActivityDisplayFaceReg"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_face_registration_on_main_screen"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityButtonArticle3Visible" />
+
+
+    <CheckBox
+        android:id="@+id/mainActivityDisplayButtonVideo"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_button_video_on_main_screen"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayFaceReg" />
+
+    <CheckBox
+        android:id="@+id/mainActivityDisplayButtonRepose"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/show_button_repose_on_main_screen"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonVideo" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonRepose" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/activation_phrase_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+
+
+
+    <EditText
+        android:id="@+id/activationPhrase"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/activation_phrase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="LabelFor" />
+
+
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/map_name_override"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activationPhrase" />
+
+    <EditText
+        android:id="@+id/mapNameOverride"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/robot_name_override"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapNameOverride" />
+
+    <EditText
+        android:id="@+id/robotNameOverride"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/robotNameOverride" />
+
+
+    <TextView
+        android:id="@+id/textViewRobotDetails"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:singleLine="false"
+        android:text="Tech info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+    <Button
+        android:id="@+id/buttonSettingsUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="buttonSettingsUpdateOnClick"
+        android:text="@string/update"
+        android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/settingsButtonRights"
+        app:layout_constraintTop_toTopOf="@+id/settingsButtonRights" />
+
+    <ProgressBar
+        android:id="@+id/settingsProgressBarUpdate"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="64dp"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonSettingsUpdate"
+        app:layout_constraintTop_toTopOf="@+id/buttonSettingsUpdate" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
