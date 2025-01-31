@@ -27,12 +27,14 @@ import com.robotemi.sdk.map.MapDataModel
 import com.robotemi.sdk.navigation.listener.OnCurrentPositionChangedListener
 import com.robotemi.sdk.navigation.listener.OnReposeStatusChangedListener
 import com.robotemi.sdk.navigation.model.Position
+import com.robotemi.sdk.voice.WakeupOrigin
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 import com.zeugmasolutions.localehelper.LocaleHelper
 import com.zeugmasolutions.localehelper.LocaleHelperApplicationDelegate
+import ee.taltech.aireapplication.AnalyzeActivity.Companion
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
 import ee.taltech.aireapplication.helpers.BroadcastReceiverInActivity
 import ee.taltech.aireapplication.helpers.C
@@ -311,6 +313,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
     }
 
     // TODO: update these values after settings activity has been visited
+    /*
     private val faceStrings: List<String> by lazy {
         listOf(
             SettingsRepository.getLangString(
@@ -340,6 +343,38 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
             )
         )
     }
+
+*/
+
+    // should load dynamically on every access
+    private val faceStrings: List<String> get() =
+        listOf(
+            SettingsRepository.getLangString(
+                this,
+                "faceDetectionPhrase0",
+                getString(R.string.face_recognized_0)
+            ),
+            SettingsRepository.getLangString(
+                this,
+                "faceDetectionPhrase1",
+                getString(R.string.face_recognized_1)
+            ),
+            SettingsRepository.getLangString(
+                this,
+                "faceDetectionPhrase2",
+                getString(R.string.face_recognized_2)
+            ),
+            SettingsRepository.getLangString(
+                this,
+                "faceDetectionPhrase3",
+                getString(R.string.face_recognized_3)
+            ),
+            SettingsRepository.getLangString(
+                this,
+                "faceDetectionPhrase4",
+                getString(R.string.face_recognized_4)
+            )
+        )
 
     fun getFaceString(contactModelList: List<ContactModel>): String {
         var sentence = faceStrings[faceStrings.indices.random()]
@@ -452,9 +487,6 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         return toast
     }
 
-    override fun onWakeupWord(wakeupWord: String, direction: Int) {
-        Log.d(TAG, "onWakeupWord $wakeupWord, direction: $direction")
-    }
 
     override fun onAsrResult(asrResult: String, sttLanguage: SttLanguage) {
         Log.d(TAG, "onAsrResult $asrResult, lang: ${sttLanguage.name}")
@@ -518,6 +550,10 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
             }
         }
         previousPosition = position;
+    }
+
+    override fun onWakeupWord(wakeupWord: String, direction: Int, origin: WakeupOrigin) {
+        Log.d(TAG, "onWakeupWord: $wakeupWord")
     }
 
     /*

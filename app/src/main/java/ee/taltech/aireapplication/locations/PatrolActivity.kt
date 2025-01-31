@@ -61,7 +61,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
     private var patrolActive = false
     private var goingToLocation: Location? = null
     private var goingToLocationIndex: Int = -1
-    private lateinit var homeBaseLocation: Location
+    private var homeBaseLocation: Location? = null
 
     private var faceDetectionPauseActive = false
     private val faceDetectionPauseDuration = 10 * 1000L
@@ -129,6 +129,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
 
         // load settings
         loadSettings()
+        Log.d(TAG, "patrol info. Homebase: ${homeBaseLocation?.displayName ?: "null"}, first location: ${patrolLocations[0].displayName}, patrolSingleRun: $patrolSingleRun")
     }
 
     private fun loadSettings() {
@@ -176,7 +177,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
             resources.getBoolean(R.bool.patrolCheckBoxUseFaceDetectionCustomMessage)
         )
 
-        patrolFaceDetectionCustomMessage= SettingsRepository.getLangString(
+        patrolFaceDetectionCustomMessage = SettingsRepository.getLangString(
             this,
             "patrolEditTextFaceDetectionCustomMessage",
             getString(R.string.patrolEditTextFaceDetectionCustomMessage)
@@ -304,7 +305,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         applicationScope.launch {
             BackendApiKtorSingleton.logEvent(
                 tag = "${TAG}.patrolLocationComplete",
-                message = "location: $location"
+                message = "location: $location index: $goingToLocationIndex singlerun: $patrolSingleRun"
             )
         }
 
@@ -325,7 +326,9 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         }
 
         goingToLocation =
-            if (goingToLocationIndex == -1) homeBaseLocation else patrolLocations[goingToLocationIndex]
+            if (goingToLocationIndex == -1) {
+                if (homeBaseLocation != null) homeBaseLocation else patrolLocations[0]
+            } else patrolLocations[goingToLocationIndex]
 
 
         applicationScope.launch {

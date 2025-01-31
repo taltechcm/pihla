@@ -33,6 +33,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.enums.enumEntries
 
 
 class SettingsActivity : BaseActivity() {
@@ -41,7 +42,15 @@ class SettingsActivity : BaseActivity() {
     }
 
 
-    private val password = "01"
+    private val password = "74000323"
+
+    private val settingsPasswordValue: String
+        get() = SettingsRepository.getString(
+            this,
+            "settingsPassword",
+            "012345"
+        )
+
     private var enteredPassword = ""
 
     private lateinit var settingsLayout: ConstraintLayout
@@ -89,6 +98,9 @@ class SettingsActivity : BaseActivity() {
     private lateinit var robotNameOverride: EditText
     private lateinit var mapNameOverride: EditText
     private lateinit var personalizeFaceDetectionMessages: CheckBox
+
+    private lateinit var settingsPassword: EditText
+
 
     private lateinit var settingsProgressBarUpdate: ProgressBar
 
@@ -147,6 +159,8 @@ class SettingsActivity : BaseActivity() {
 
         textViewRobotDetails = findViewById(R.id.textViewRobotDetails)
 
+        settingsPassword = findViewById(R.id.settingsPassword)
+
         settingsProgressBarUpdate = findViewById(R.id.settingsProgressBarUpdate)
         settingsProgressBarUpdate.visibility = View.INVISIBLE
 
@@ -167,7 +181,7 @@ class SettingsActivity : BaseActivity() {
                 "Version code: ${pInfo.longVersionCode}\n" +
                 "Version name: ${pInfo.versionName}\n" +
                 "Multifloor: ${app.robot.isMultiFloorEnabled()}\n" +
-                "Floor: ${app.robot.getCurrentFloor()}\n" +
+                app.robot.getAllFloors().map { f -> f.toString() }.joinToString("\n") + "\n" +
                 "Is real temi:${App.IS_REAL_TEMI}\n" +
                 "FINGERPRINT:${Build.FINGERPRINT}\n" +
                 "MODEL:${Build.MODEL}\n" +
@@ -177,6 +191,10 @@ class SettingsActivity : BaseActivity() {
                 "BOARD:${Build.BOARD}\n" +
                 "HOST:${Build.HOST}\n" +
                 "PRODUCT:${Build.PRODUCT}\n"
+
+        app.robot.getAllFloors().forEach { f ->
+            Log.d(TAG, "Floor: $f")
+        }
     }
 
     fun activitySettingsOnClick(view: View) {
@@ -194,7 +212,7 @@ class SettingsActivity : BaseActivity() {
         }
         settingsPasswordTextView.text = enteredPassword
 
-        if (enteredPassword.contains(password)) {
+        if (enteredPassword.contains(password) || enteredPassword.contains(settingsPasswordValue)) {
             settingsLayout.visibility = View.VISIBLE
             settingsConstraintLayoutPwdButtons.visibility = View.INVISIBLE
             enteredPassword = ""
@@ -408,6 +426,13 @@ class SettingsActivity : BaseActivity() {
                 resources.getBoolean(R.bool.personalizeFaceDetectionMessages)
             )
 
+        settingsPassword.setText(
+            SettingsRepository.getString(
+                this,
+                "settingsPassword",
+                "012345"
+            )
+        )
     }
 
     private fun saveValues() {
@@ -557,6 +582,12 @@ class SettingsActivity : BaseActivity() {
             "personalizeFaceDetectionMessages",
             personalizeFaceDetectionMessages.isChecked
         )
+
+        SettingsRepository.setString(
+            this,
+            "settingsPassword",
+            settingsPassword.text.toString()
+        )
     }
 
     fun settingsCloseAppButtonOnClick(view: View) {
@@ -630,6 +661,8 @@ class SettingsActivity : BaseActivity() {
         val prefsEditor: SharedPreferences.Editor = appSharedPrefs.edit()
         prefsEditor.putString(App.MAP_ID, jsonStr)
         prefsEditor.commit()
+
+        Log.d(TAG, "Locations saved to shared prefs. ${App.MAP_ID} $jsonStr")
     }
 
     fun settingsButtonRightsOnClick(view: View) {

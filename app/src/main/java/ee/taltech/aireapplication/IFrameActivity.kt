@@ -1,8 +1,11 @@
 package ee.taltech.aireapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.WebView
+import com.robotemi.sdk.voice.WakeupOrigin
+import ee.taltech.aireapplication.App.Companion
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
 import ee.taltech.aireapplication.helpers.BaseActivity
@@ -40,4 +43,5 @@ class IFrameActivity : BaseActivity() {
 
         finish()
     }
+
 }

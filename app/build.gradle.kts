@@ -95,7 +95,7 @@ dependencies {
 
 
 
-    implementation("com.robotemi:sdk:1.134.1")
+    implementation("com.robotemi:sdk:1.135.1")
 
 
 

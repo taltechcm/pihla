@@ -15,6 +15,7 @@ import android.widget.TextView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
+import com.robotemi.sdk.voice.WakeupOrigin
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.NewsActivity.Companion
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
@@ -261,6 +262,5 @@ class ArticleActivity : BaseActivity(), CustomAsrListener, SeekBar.OnSeekBarChan
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
     }
-
 
 }

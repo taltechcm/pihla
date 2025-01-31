@@ -74,7 +74,7 @@ class LocationsRepository(private val context: Context, private val systemLocati
         return locations
     }
 
-    fun getHomeBaseLocation(mapId: String, locale: Locale): Location {
+    fun getHomeBaseLocation(mapId: String, locale: Locale): Location? {
         val appSharedPrefs: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context)
         if (!appSharedPrefs.contains(mapId)) return systemLocations
@@ -102,7 +102,7 @@ class LocationsRepository(private val context: Context, private val systemLocati
                     patrolPriority = l.patrolPriority
                 )
             }
-            .first()
+            .firstOrNull()
 
         return location
     }

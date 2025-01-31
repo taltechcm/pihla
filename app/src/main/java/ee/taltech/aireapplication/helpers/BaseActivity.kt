@@ -17,10 +17,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
+import com.robotemi.sdk.voice.WakeupOrigin
 import com.zeugmasolutions.localehelper.LocaleHelper
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegate
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegateImpl
 import ee.taltech.aireapplication.App
+import ee.taltech.aireapplication.IFrameActivity
+import ee.taltech.aireapplication.IFrameActivity.Companion
 import ee.taltech.aireapplication.R
 import java.util.Locale
 
@@ -225,9 +228,10 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         wakeupWordDetected = false
     }
 
-    override fun onWakeupWord(wakeupWord: String, direction: Int) {
-        wakeupWordDetected = true
+    override fun onWakeupWord(wakeupWord: String, direction: Int, origin: WakeupOrigin) {
+        Log.d(TAG, "onWakeupWord: $wakeupWord")
     }
+
 
 
 }

@@ -20,6 +20,7 @@ import com.robotemi.sdk.face.OnFaceRecognizedListener
 import com.robotemi.sdk.listeners.*
 import com.robotemi.sdk.permission.OnRequestPermissionResultListener
 import com.robotemi.sdk.permission.Permission
+import com.robotemi.sdk.voice.WakeupOrigin
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
 import ee.taltech.aireapplication.helpers.BaseActivity

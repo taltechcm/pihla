@@ -398,7 +398,7 @@ class MainActivity : BaseActivity(), CustomAsrListener {
         triggers["patrol"] = listOf("ringi", "sõit", "patrull")
         triggers["news"] = listOf("uudis", "loe")
 
-        triggers["age"] = listOf("arva", "vanus")
+        //triggers["age"] = listOf("arva", "vanus")
         triggers["game"] = listOf("meele", "mäng", "lahutus", "lõnu")
 
 
@@ -440,39 +440,49 @@ class MainActivity : BaseActivity(), CustomAsrListener {
                 logMessage = "launch ${NewsActivity.javaClass.simpleName}"
             )
 
+            /*
             "age" -> launchActivity(
                 cls = AnalyzeActivity::class.java,
                 speakStr = getString(R.string.Game1),
                 logTAG = "$TAG.onAsrResult",
                 logMessage = "launch AnalyzeActivity"
             )
+            */
 
-            "menu" -> launchActivity(
-                cls = ArticleActivity::class.java,
-                speakStr = null,
-                logTAG = "$TAG.onAsrResult",
-                logMessage = "launch Menu",
-                intentExtraName = "article",
-                intentExtraValue = "menu"
-            )
+            "menu" ->
+                if (buttonArticle1.visibility == View.VISIBLE) {
+                    launchActivity(
+                        cls = ArticleActivity::class.java,
+                        speakStr = null,
+                        logTAG = "$TAG.onAsrResult",
+                        logMessage = "launch Menu",
+                        intentExtraName = "article",
+                        intentExtraValue = "menu"
+                    )
+                }
 
-            "schedule" -> launchActivity(
-                cls = ArticleActivity::class.java,
-                speakStr = null,
-                logTAG = "$TAG.onAsrResult",
-                logMessage = "launch Schedule",
-                intentExtraName = "article",
-                intentExtraValue = "schedule"
-            )
+            "schedule" -> if (buttonArticle2.visibility == View.VISIBLE) {
+                launchActivity(
+                    cls = ArticleActivity::class.java,
+                    speakStr = null,
+                    logTAG = "$TAG.onAsrResult",
+                    logMessage = "launch Schedule",
+                    intentExtraName = "article",
+                    intentExtraValue = "schedule"
+                )
+            }
 
-            "varia" -> launchActivity(
-                cls = ArticleActivity::class.java,
-                speakStr = null,
-                logTAG = "$TAG.onAsrResult",
-                logMessage = "launch Varia",
-                intentExtraName = "article",
-                intentExtraValue = "varia"
-            )
+
+            "varia" -> if (buttonArticle3.visibility == View.VISIBLE) {
+                launchActivity(
+                    cls = ArticleActivity::class.java,
+                    speakStr = null,
+                    logTAG = "$TAG.onAsrResult",
+                    logMessage = "launch Varia",
+                    intentExtraName = "article",
+                    intentExtraValue = "varia"
+                )
+            }
 
             "game" ->
                 launchActivity(
@@ -549,7 +559,7 @@ class MainActivity : BaseActivity(), CustomAsrListener {
         checkInstallPrivilege()
         val permissionsNeeded = ArrayList<String>()
         permissionsNeeded.addAll(retrievePermissionsFromManifest(applicationContext))
-        if (!App.IS_REAL_TEMI){
+        if (!App.IS_REAL_TEMI) {
             permissionsNeeded.remove("android.permission.REQUEST_INSTALL_PACKAGES")
             permissionsNeeded.remove("android.permission.READ_EXTERNAL_STORAGE")
             permissionsNeeded.remove("android.permission.WRITE_EXTERNAL_STORAGE")
