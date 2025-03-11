@@ -16,4 +16,6 @@
     <bool name="personalizeFaceDetectionMessages">false</bool>
     <bool name="mainActivityDisplayButtonVideo">false</bool>
     <bool name="mainActivityDisplayButtonRepose">false</bool>
+    <bool name="mainActivityDisplayButtonPatrol">true</bool>
+
 </resources>

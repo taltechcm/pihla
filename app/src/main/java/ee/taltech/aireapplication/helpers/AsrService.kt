@@ -167,12 +167,13 @@ class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
         Log.d(TAG, "onDestroy")
 
         recorder.stop()
-        super.onDestroy()
 
         val nMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         nMgr.cancelAll()
 
+        delayJob?.cancel()
 
+        super.onDestroy()
     }
 
     override fun onLowMemory() {

@@ -15,6 +15,7 @@ import android.widget.TextView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
+import com.robotemi.sdk.face.ContactModel
 import com.robotemi.sdk.voice.WakeupOrigin
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.NewsActivity.Companion
@@ -58,7 +59,7 @@ class ArticleActivity : BaseActivity(), CustomAsrListener, SeekBar.OnSeekBarChan
     override fun onResume() {
         super.onResume()
 
-        app.faceDetectionDisabled = true
+        //app.faceDetectionDisabled = true
 
         applicationScope.launch {
             var articleTitle = intent.getStringExtra("article")
@@ -85,7 +86,7 @@ class ArticleActivity : BaseActivity(), CustomAsrListener, SeekBar.OnSeekBarChan
 
     override fun onPause() {
         super.onPause()
-        app.faceDetectionDisabled = false
+        //app.faceDetectionDisabled = false
 
         app.removeCustomAsrListener(this)
     }
@@ -249,7 +250,7 @@ class ArticleActivity : BaseActivity(), CustomAsrListener, SeekBar.OnSeekBarChan
         ttsStatus = ttsRequest.status
     }
 
-    // ===================== Seekbar ==============
+    // =========================================================== Seekbar ===========================================================
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         if (seekBar == seekBarZoom) {
             articleWebView.settings.textZoom = progress
@@ -257,10 +258,14 @@ class ArticleActivity : BaseActivity(), CustomAsrListener, SeekBar.OnSeekBarChan
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
     }
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
     }
 
+
+    // =========================================================== FACE =====================================================
+    override fun onFaceRecognized(contactModelList: List<ContactModel>) {
+        // do nothing
+    }
 }

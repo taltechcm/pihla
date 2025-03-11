@@ -1,4 +1,4 @@
-package ee.taltech.aireapplication.locations
+package ee.taltech.aireapplication.helpers
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import ee.taltech.aireapplication.R
 import ee.taltech.aireapplication.domain.Location
 
-class DataRecyclerViewAdapter(
+public interface TObjectDisplayName {
+    var displayName: String
+}
+
+class ObjectDataRecyclerViewAdapter<TObject: TObjectDisplayName>(
     context: Context,
-    private val dataSet: List<Location>,
-    val updateFn: (location: Location, position: Int) -> Unit,
-) :
-    RecyclerView.Adapter<DataRecyclerViewAdapter.ViewHolder>() {
+    private val dataSet: List<TObject>,
+    val updateFn: (location: TObject, position: Int) -> Unit,
+) : RecyclerView.Adapter<ObjectDataRecyclerViewAdapter<TObject>.ViewHolder>() {
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun getItemCount(): Int {
@@ -40,7 +44,4 @@ class DataRecyclerViewAdapter(
             }
         }
     }
-
-
-
 }

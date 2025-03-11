@@ -91,6 +91,7 @@ class AnalyzeActivity : BaseActivity(), TtsListener, OnRequestPermissionResultLi
 
         robot.addOnFaceRecognizedListener(this)
         robot.addOnContinuousFaceRecognizedListener(this)
+
         robot.addOnRobotReadyListener(this)
         robot.addTtsListener(this)
 
