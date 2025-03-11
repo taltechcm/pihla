@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
+import com.robotemi.sdk.face.ContactModel
 import com.robotemi.sdk.listeners.OnBeWithMeStatusChangedListener
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.dto.NewsItem
@@ -99,7 +100,7 @@ class NewsActivity : BaseActivity(), CustomAsrListener, OnBeWithMeStatusChangedL
         super.onResume()
         refreshTemiUi()
 
-        app.faceDetectionDisabled = true
+        //app.faceDetectionDisabled = true
 
         applicationScope.launch {
             newsItems = BackendApiKtorSingleton.getNews()
@@ -117,7 +118,7 @@ class NewsActivity : BaseActivity(), CustomAsrListener, OnBeWithMeStatusChangedL
 
     override fun onPause() {
         super.onPause()
-        app.faceDetectionDisabled = false
+        //app.faceDetectionDisabled = false
 
         app.removeCustomAsrListener(this)
 
@@ -320,6 +321,11 @@ class NewsActivity : BaseActivity(), CustomAsrListener, OnBeWithMeStatusChangedL
             "left" -> skipNews(1)
             "right" -> skipNews(-1)
         }
+    }
+
+    // =========================================================== FACE =====================================================
+    override fun onFaceRecognized(contactModelList: List<ContactModel>) {
+        // do nothing
     }
 
 }

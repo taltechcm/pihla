@@ -7,8 +7,10 @@ import android.content.pm.PackageInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import android.view.WindowMetrics
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.CheckBox
@@ -33,7 +35,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
-import kotlin.enums.enumEntries
+import kotlin.system.exitProcess
 
 
 class SettingsActivity : BaseActivity() {
@@ -90,6 +92,7 @@ class SettingsActivity : BaseActivity() {
 
     private lateinit var mainActivityDisplayButtonVideo: CheckBox
     private lateinit var mainActivityDisplayButtonRepose: CheckBox
+    private lateinit var  mainActivityDisplayButtonPatrol: CheckBox
 
     private lateinit var textViewRobotDetails: TextView
 
@@ -149,6 +152,7 @@ class SettingsActivity : BaseActivity() {
 
         mainActivityDisplayButtonVideo = findViewById(R.id.mainActivityDisplayButtonVideo)
         mainActivityDisplayButtonRepose = findViewById(R.id.mainActivityDisplayButtonRepose)
+        mainActivityDisplayButtonPatrol= findViewById(R.id.mainActivityDisplayButtonPatrol)
 
         activationPhrase = findViewById(R.id.activationPhrase)
 
@@ -173,6 +177,13 @@ class SettingsActivity : BaseActivity() {
         val pInfo: PackageInfo =
             this.packageManager.getPackageInfo(this.packageName, 0)
 
+        val windowMetrics: WindowMetrics = windowManager.currentWindowMetrics
+
+        val height = windowMetrics.bounds.height()
+        val width = windowMetrics.bounds.width()
+
+
+
         textViewRobotDetails.text = "ANDROID_ID: ${App.ANDROID_ID}\n" +
                 "MAP_ID: ${App.MAP_ID}\n" +
                 "MAP_NAME: ${App.MAP_NAME}\n" +
@@ -180,6 +191,7 @@ class SettingsActivity : BaseActivity() {
                 "APP_LAUNCH_ID: ${App.APP_LAUNCH_ID}\n" +
                 "Version code: ${pInfo.longVersionCode}\n" +
                 "Version name: ${pInfo.versionName}\n" +
+                "Window: $width x $height \n" +
                 "Multifloor: ${app.robot.isMultiFloorEnabled()}\n" +
                 app.robot.getAllFloors().map { f -> f.toString() }.joinToString("\n") + "\n" +
                 "Is real temi:${App.IS_REAL_TEMI}\n" +
@@ -391,6 +403,14 @@ class SettingsActivity : BaseActivity() {
                 resources.getBoolean(R.bool.mainActivityDisplayButtonRepose)
             )
 
+        mainActivityDisplayButtonPatrol.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonPatrol",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonPatrol)
+            )
+
+
         activationPhrase.setText(
             SettingsRepository.getLangString(
                 this,
@@ -560,6 +580,12 @@ class SettingsActivity : BaseActivity() {
             mainActivityDisplayButtonRepose.isChecked
         )
 
+        SettingsRepository.setBoolean(
+            this,
+            "mainActivityDisplayButtonPatrol",
+            mainActivityDisplayButtonPatrol.isChecked
+        )
+
         SettingsRepository.setLangString(
             this,
             "activationPhrase",
@@ -609,9 +635,9 @@ class SettingsActivity : BaseActivity() {
             moveTaskToBack(true)
 
             // Close all activities
-            //finishAffinity()
-
+            finishAffinity()
             finishAndRemoveTask();
+            exitProcess(0);
 
             //delay(1000L)
 
@@ -768,6 +794,10 @@ class SettingsActivity : BaseActivity() {
 
     fun settingsButtonFaceRegOnClick(view: View) {
         startActivity(Intent(this, FaceActivity::class.java))
+    }
+
+    fun settingsButtonFloorClicked(view: View) {
+        startActivity(Intent(this, FloorActivity::class.java))
     }
 
 }

@@ -269,5 +269,8 @@
     <string name="varia">Varia</string>
     <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Use custom message</string>
     <string name="show_varia_button_in_main_screen">Show \'Varia\' button in main screen</string>
+    <string name="display_button_patrol_on_main_activity">Show \'Patrol\' button in main screen</string>
+    <string name="floor">Floor:</string>
+    <string name="buttonfloor">Floors</string>
 
 </resources>

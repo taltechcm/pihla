@@ -34,7 +34,8 @@ import java.text.DecimalFormat
 
 class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
     OnDistanceToDestinationChangedListener,
-    OnFaceRecognizedListener, CustomAsrListener {
+    // OnFaceRecognizedListener,
+    CustomAsrListener {
 
     companion object {
         private val TAG = this::class.java.declaringClass!!.simpleName
@@ -295,7 +296,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         patrolActive = !patrolActive
 
         // no app level face detection when patrol is active
-        app.faceDetectionDisabled = patrolActive
+        //app.faceDetectionDisabled = patrolActive
     }
 
     // ============================= MISC =============================
@@ -375,13 +376,13 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
     private fun bindTemiEventListeners() {
         app.robot.addOnGoToLocationStatusChangedListener(this)
         app.robot.addOnDistanceToDestinationChangedListener(this)
-        app.robot.addOnFaceRecognizedListener(this)
+        //app.robot.addOnFaceRecognizedListener(this)
     }
 
     private fun unbindTemiEventListeners() {
         app.robot.removeOnGoToLocationStatusChangedListener(this)
         app.robot.removeOnDistanceToDestinationChangedListener(this)
-        app.robot.removeOnFaceRecognizedListener(this)
+        //app.robot.removeOnFaceRecognizedListener(this)
     }
 
     // https://github.com/robotemi/sdk/wiki/Locations#onGoToLocationStatusChangedListener
@@ -454,7 +455,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
                         )
                     } else {
                         app.speak(
-                            sentence = app.getFaceString(contactModelList),
+                            sentence = getFaceString(contactModelList),
                             shown = false
                         )
                     }
@@ -478,7 +479,7 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
                     applicationScope.launch {
                         BackendApiKtorSingleton.logEvent(
                             tag = "${TAG}.playPatrolRepeatMessage",
-                            message = patrolRepeatMessage + " delay: " + patrolRepeatMessageInterval
+                            message = "$patrolRepeatMessage delay: $patrolRepeatMessageInterval"
                         )
                     }
 

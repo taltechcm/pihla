@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -20,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
+import com.robotemi.sdk.listeners.OnRobotReadyListener
 import com.robotemi.sdk.permission.Permission
 import ee.taltech.aireapplication.helpers.BaseActivity
 import ee.taltech.aireapplication.helpers.C
@@ -40,7 +42,7 @@ import kotlinx.coroutines.launch
 
 //test declaring robot instead of repeated use of app.robot
 
-class MainActivity : BaseActivity(), CustomAsrListener {
+class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
     companion object {
         private val TAG = this::class.java.declaringClass!!.simpleName
@@ -52,7 +54,10 @@ class MainActivity : BaseActivity(), CustomAsrListener {
 
     private lateinit var buttonRegisterFace: Button
     private lateinit var buttonVideo: Button
+    private lateinit var buttonPatrol: Button
     private lateinit var reposeButton: Button
+
+    private lateinit var textViewFloorInfo: TextView
 
     // call in onResume and onRobotReady
     private fun refreshTemiUi() {
@@ -83,6 +88,11 @@ class MainActivity : BaseActivity(), CustomAsrListener {
         buttonRegisterFace = findViewById(R.id.buttonRegisterFace)
         buttonVideo = findViewById(R.id.buttonVideo)
         reposeButton = findViewById(R.id.reposeButton)
+        buttonPatrol= findViewById(R.id.buttonPatrol)
+
+        textViewFloorInfo = findViewById(R.id.textViewFloorInfo)
+
+        app.robot.addOnRobotReadyListener(this)
     }
 
 
@@ -120,6 +130,7 @@ class MainActivity : BaseActivity(), CustomAsrListener {
         app.addCustomAsrListener(this)
 
 
+        textViewFloorInfo.text = app.robot.getCurrentFloor()?.name ?: "-"
 
 
         buttonArticle1.visibility = if (SettingsRepository.getBoolean(
@@ -166,9 +177,14 @@ class MainActivity : BaseActivity(), CustomAsrListener {
             )
         ) View.VISIBLE else View.INVISIBLE
 
+        buttonPatrol.visibility = if (SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonPatrol",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonPatrol)
+            )
+        ) View.VISIBLE else View.INVISIBLE
 
-
-        app.faceDetectionDisabled = false
+        // app.faceDetectionDisabled = false
     }
 
 
@@ -176,6 +192,7 @@ class MainActivity : BaseActivity(), CustomAsrListener {
         super.onPause()
         Log.d(TAG, "onPause")
         app.removeCustomAsrListener(this)
+        app.robot.removeOnRobotReadyListener(this)
     }
 
     override fun onDestroy() {
@@ -753,6 +770,10 @@ class MainActivity : BaseActivity(), CustomAsrListener {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    override fun onRobotReady(isReady: Boolean) {
+        textViewFloorInfo.text = app.robot.getCurrentFloor()?.name ?: "-"
     }
 
 }

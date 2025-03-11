@@ -45,6 +45,18 @@
         app:layout_constraintTop_toTopOf="@+id/buttonSyncLocations" />
 
     <Button
+        android:id="@+id/settingsButtonFloor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:onClick="settingsButtonFloorClicked"
+        android:text="@string/buttonfloor"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
+
+
+    <Button
         android:id="@+id/settingsButtonFaceReg"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -54,8 +66,10 @@
         android:text="@string/register_face"
         android:textSize="34sp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/settingsButtonFloor"
         app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
+
+
 
     <TextView
         android:id="@+id/textView3"
@@ -415,6 +429,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainActivityButtonArticle3Visible" />
 
+    <CheckBox
+        android:id="@+id/mainActivityDisplayButtonPatrol"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/display_button_patrol_on_main_activity"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayFaceReg" />
+
+
 
     <CheckBox
         android:id="@+id/mainActivityDisplayButtonVideo"
@@ -427,7 +455,7 @@
         android:text="@string/show_button_video_on_main_screen"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayFaceReg" />
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonPatrol" />
 
     <CheckBox
         android:id="@+id/mainActivityDisplayButtonRepose"
@@ -623,6 +651,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonSettingsUpdate"
         app:layout_constraintTop_toTopOf="@+id/buttonSettingsUpdate" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

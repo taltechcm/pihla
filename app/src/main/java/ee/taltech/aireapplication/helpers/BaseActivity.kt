@@ -17,17 +17,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.TtsRequest
+import com.robotemi.sdk.face.ContactModel
+import com.robotemi.sdk.face.OnFaceRecognizedListener
 import com.robotemi.sdk.voice.WakeupOrigin
 import com.zeugmasolutions.localehelper.LocaleHelper
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegate
 import com.zeugmasolutions.localehelper.LocaleHelperActivityDelegateImpl
 import ee.taltech.aireapplication.App
-import ee.taltech.aireapplication.IFrameActivity
-import ee.taltech.aireapplication.IFrameActivity.Companion
+import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Locale
 
-open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListener,  Robot.WakeupWordListener {
+open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListener,
+    Robot.WakeupWordListener,
+    OnFaceRecognizedListener {
 
     companion object {
         private val TAG = this::class.java.declaringClass!!.simpleName
@@ -61,13 +66,13 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         val popupView = inflater.inflate(R.layout.popup, null)
         val animationView = inflater.inflate(R.layout.face_animation, null)
 
-        popupView.setOnTouchListener { view, motionEvent ->
+        popupView.setOnTouchListener { view, _ ->
             view.performClick()
             popupWindow.dismiss()
             true
         }
 
-        animationView.setOnTouchListener { view, motionEvent ->
+        animationView.setOnTouchListener { view, _ ->
             view.performClick()
             animationOverlayWindow.dismiss()
             true
@@ -78,7 +83,7 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         val focusable = false
 
         popupWindow = PopupWindow(popupView, width, height, focusable)
-        popupTextView = popupView.findViewById<TextView>(R.id.popupTextView)
+        popupTextView = popupView.findViewById(R.id.popupTextView)
         popupTextView.text = ""
 
 
@@ -96,8 +101,9 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         super.onResume()
 
         app.robot.addTtsListener(this)
-        app.robot.addAsrListener(this);
+        app.robot.addAsrListener(this)
         app.robot.addWakeupWordListener(this)
+        app.robot.addOnFaceRecognizedListener(this)
 
         localeDelegate.onResumed(this)
 
@@ -118,8 +124,9 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         super.onPause()
 
         app.robot.removeTtsListener(this)
-        app.robot.removeAsrListener(this);
+        app.robot.removeAsrListener(this)
         app.robot.removeWakeupWordListener(this)
+        app.robot.removeOnFaceRecognizedListener(this)
 
         localeDelegate.onPaused()
     }
@@ -155,7 +162,7 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         }
     }
 
-    fun updateFaceAnimationStatusText(statusText: String){
+    fun updateFaceAnimationStatusText(statusText: String) {
         animationOverlayStatusText.text = statusText
     }
 
@@ -174,12 +181,12 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
 
     fun hidePopup(duration: Long = 4000) {
         if (popupWindow.isShowing) {
-            var animation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
             animation.duration = duration
             animation.fillAfter = true
             popupTextView.startAnimation(animation)
 
-            Handler(Looper.getMainLooper()).postDelayed(Runnable {
+            Handler(Looper.getMainLooper()).postDelayed({
                 if (popupWindow.isShowing) {
                     popupTextView.clearAnimation()
                     popupWindow.dismiss()
@@ -202,12 +209,12 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
             32, 100
         )
 
-        var animation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        val animation = AnimationUtils.loadAnimation(this, R.anim.fade_out)
         animation.duration = duration
         animation.fillAfter = true
         popupTextView.startAnimation(animation)
 
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
+        Handler(Looper.getMainLooper()).postDelayed({
             if (popupWindow.isShowing) {
                 popupTextView.clearAnimation()
                 popupWindow.dismiss()
@@ -220,6 +227,7 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
             TtsRequest.Status.STARTED -> {
                 showPopup(ttsRequest.speech, 4000L)
             }
+
             else -> {}
         }
     }
@@ -232,6 +240,116 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         Log.d(TAG, "onWakeupWord: $wakeupWord")
     }
 
+
+    // =========================================================== FACE =====================================================
+    private var faceDetectionDebounce = false
+    var faceDetectionDisabled = false
+
+    // should load dynamically on every access
+    private val faceStrings: List<String>
+        get() =
+            listOf(
+                SettingsRepository.getLangString(
+                    this,
+                    "faceDetectionPhrase0",
+                    getString(R.string.face_recognized_0)
+                ),
+                SettingsRepository.getLangString(
+                    this,
+                    "faceDetectionPhrase1",
+                    getString(R.string.face_recognized_1)
+                ),
+                SettingsRepository.getLangString(
+                    this,
+                    "faceDetectionPhrase2",
+                    getString(R.string.face_recognized_2)
+                ),
+                SettingsRepository.getLangString(
+                    this,
+                    "faceDetectionPhrase3",
+                    getString(R.string.face_recognized_3)
+                ),
+                SettingsRepository.getLangString(
+                    this,
+                    "faceDetectionPhrase4",
+                    getString(R.string.face_recognized_4)
+                )
+            )
+
+    fun getFaceString(contactModelList: List<ContactModel>): String {
+        var sentence = faceStrings[faceStrings.indices.random()]
+
+        // TODO: check, that user id is in registered users
+        try {
+            contactModelList[0].userId.toInt()
+            sentence = sentence.replace("<%name%>", "")
+        } catch (e: NumberFormatException) {
+            // is name usage turned on?
+            sentence = if (SettingsRepository.getBoolean(
+                    this,
+                    "personalizeFaceDetectionMessages",
+                    resources.getBoolean(R.bool.personalizeFaceDetectionMessages)
+                )
+            ) {
+                sentence.replace("<%name%>", contactModelList[0].userId + "! ")
+            } else {
+                sentence.replace("<%name%>", "")
+            }
+        }
+
+        sentence = sentence.trim()
+
+        return sentence
+    }
+
+    override fun onFaceRecognized(contactModelList: List<ContactModel>) {
+        if (contactModelList.isEmpty()) {
+            Log.d(TAG, "onFaceRecognized: person left")
+            return
+        } else {
+
+            if (faceDetectionDebounce || faceDetectionDisabled) {
+                Log.d(
+                    TAG,
+                    "onFaceRecognized - debounce:$faceDetectionDebounce disabled:$faceDetectionDisabled count:${contactModelList.size}"
+                )
+                return
+            }
+
+            faceDetectionDebounce = true
+
+            if (ttsStatus == TtsRequest.Status.COMPLETED) {
+                Log.d(
+                    TAG,
+                    "Face Recognized count: ${contactModelList.size}, first userId: ${contactModelList[0].userId}, similarity: ${contactModelList[0].similarity}"
+                )
+
+                applicationScope.launch {
+                    BackendApiKtorSingleton.logEvent(
+                        tag = "$TAG.faceRecognized",
+                        message = "Face Recognized count: ${contactModelList.size}, first userId: ${contactModelList[0].userId}, similarity: ${contactModelList[0].similarity}"
+                    )
+                }
+
+                app.robot.speak(
+                    TtsRequest.create(
+                        getFaceString(contactModelList),
+                        false,
+                        TtsRequest.Language.ET_EE,
+                        showAnimationOnly = false,
+                        cached = false
+                    )
+                )
+            } else {
+                Log.w(TAG, "Skipped face recognition TTS, TTS not done")
+            }
+
+            applicationScope.launch {
+                delay(10000L)
+                faceDetectionDebounce = false
+            }
+        }
+    }
 
 
 }

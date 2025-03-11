@@ -57,7 +57,7 @@ OnUserInteractionChangedListener, OnUsersUpdatedListener TtsListener, WakeUpWord
 
 class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedListener,
     OnReposeStatusChangedListener, OnRobotReadyListener, OnCurrentPositionChangedListener,
-    OnFaceRecognizedListener,
+    //OnFaceRecognizedListener,
     //OnContinuousFaceRecognizedListener,
     Robot.WakeupWordListener, Robot.AsrListener {
 
@@ -121,8 +121,8 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
     var doOnce = true
 
-    var faceDetectionDebounce = false
-    var faceDetectionDisabled = false
+    //var faceDetectionDebounce = false
+    //var faceDetectionDisabled = false
 
 
     var createOnce = true
@@ -132,7 +132,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
     //VARIABLES
     var speechLanguage = TtsRequest.Language.ET_EE
-    var ttsStatus: TtsRequest.Status = TtsRequest.Status.COMPLETED
+    //var ttsStatus: TtsRequest.Status = TtsRequest.Status.COMPLETED
 
     private var previousPosition: Position? = null
     private var distanceTravelled: Double = 0.0
@@ -179,7 +179,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         robot.addOnGoToLocationStatusChangedListener(this)
         robot.addOnReposeStatusChangedListener(this)
         robot.addOnRobotReadyListener(this)
-        robot.addOnFaceRecognizedListener(this)
+        //robot.addOnFaceRecognizedListener(this)
         // robot.addOnContinuousFaceRecognizedListener(this)
 
         robot.addWakeupWordListener(this)
@@ -193,7 +193,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         robot.removeOnGoToLocationStatusChangedListener(this)
         robot.removeOnReposeStatusChangedListener(this)
         robot.removeOnRobotReadyListener(this)
-        robot.removeOnFaceRecognizedListener(this)
+        //robot.removeOnFaceRecognizedListener(this)
         // robot.removeOnContinuousFaceRecognizedListener(this)
 
         robot.removeWakeupWordListener(this)
@@ -346,62 +346,9 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
 */
 
-    // should load dynamically on every access
-    private val faceStrings: List<String> get() =
-        listOf(
-            SettingsRepository.getLangString(
-                this,
-                "faceDetectionPhrase0",
-                getString(R.string.face_recognized_0)
-            ),
-            SettingsRepository.getLangString(
-                this,
-                "faceDetectionPhrase1",
-                getString(R.string.face_recognized_1)
-            ),
-            SettingsRepository.getLangString(
-                this,
-                "faceDetectionPhrase2",
-                getString(R.string.face_recognized_2)
-            ),
-            SettingsRepository.getLangString(
-                this,
-                "faceDetectionPhrase3",
-                getString(R.string.face_recognized_3)
-            ),
-            SettingsRepository.getLangString(
-                this,
-                "faceDetectionPhrase4",
-                getString(R.string.face_recognized_4)
-            )
-        )
 
-    fun getFaceString(contactModelList: List<ContactModel>): String {
-        var sentence = faceStrings[faceStrings.indices.random()]
 
-        // TODO: check, that user id is in registered users
-        try {
-            contactModelList[0].userId.toInt()
-            sentence = sentence.replace("<%name%>", "")
-        } catch (e: NumberFormatException) {
-            // is name usage turned on?
-            sentence = if (SettingsRepository.getBoolean(
-                    this,
-                    "personalizeFaceDetectionMessages",
-                    resources.getBoolean(R.bool.personalizeFaceDetectionMessages)
-                )
-            ) {
-                sentence.replace("<%name%>", contactModelList[0].userId + "! ")
-            } else {
-                sentence.replace("<%name%>", "")
-            }
-        }
-
-        sentence = sentence.trim()
-
-        return sentence
-    }
-
+    /*
     override fun onFaceRecognized(contactModelList: List<ContactModel>) {
 
         if (contactModelList.isEmpty()) {
@@ -456,6 +403,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
         }
     }
+    */
 
 
     override fun getApplicationContext(): Context =
@@ -549,7 +497,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
                 distanceUpdateTimestamp = curTime
             }
         }
-        previousPosition = position;
+        previousPosition = position
     }
 
     override fun onWakeupWord(wakeupWord: String, direction: Int, origin: WakeupOrigin) {

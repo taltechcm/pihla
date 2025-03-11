@@ -142,6 +142,7 @@
     <string name="show_face_registration_on_main_screen">Kuva nupp \'Registreeri nägu\' avaekraanil</string>
     <string name="show_button_video_on_main_screen">Kuva nupp \'Video\' avaekraanil</string>
     <string name="show_varia_button_in_main_screen">Kuva nupp \'Varia\' peaekraanil</string>
+    <string name="display_button_patrol_on_main_activity">Kuva nupp \'Ringisõit\' avaekraanil</string>
     <string name="show_button_repose_on_main_screen">Kuva nupp \'Repositsioneeri\' avaekraanil</string>
     <string name="check_rights">Õigused</string>
     <string name="update">Uuenda</string>
@@ -175,6 +176,8 @@
     <string name="personalize_face_detection_messages">Isikusta näotuvastussõnumid</string>
     <string name="varia">Varia</string>
     <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Kasuta seda fraasi</string>
+    <string name="floor">Korrus:</string>
+    <string name="buttonfloor">Korrused</string>
 
 
 </resources>
