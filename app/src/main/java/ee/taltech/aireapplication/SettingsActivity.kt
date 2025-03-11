@@ -30,6 +30,7 @@ import ee.taltech.aireapplication.helpers.BaseActivity
 import ee.taltech.aireapplication.helpers.SettingsRepository
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.isSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -636,8 +637,11 @@ class SettingsActivity : BaseActivity() {
 
             // Close all activities
             finishAffinity()
-            finishAndRemoveTask();
-            exitProcess(0);
+            finishAndRemoveTask()
+            delay(100)
+            android.os.Process.killProcess(android.os.Process.myPid())
+            delay(100)
+            exitProcess(0)
 
             //delay(1000L)
 

@@ -48,6 +48,8 @@ class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
         private val AUDIO_COLLECTION_MAX_DURATION_MS = 10_000
         private val AUDIO_PAUSE_BEFORE_ASR__MS = 200L
 
+        private var asrJob: Job? = null
+
 
         private val phraseList = listOf(
             "hei",
@@ -172,6 +174,7 @@ class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
         nMgr.cancelAll()
 
         delayJob?.cancel()
+        asrJob?.cancel()
 
         super.onDestroy()
     }
@@ -313,7 +316,7 @@ class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
         audioBuffer.clear()
         Log.d(TAG, "Sending ${tempAudio.size} bytes of raw audio data to backend.")
 
-        GlobalScope.launch {
+        asrJob = GlobalScope.launch {
             var text = asrBackendClient.transcribe(
                 tempAudio.toByteArray(),
                 hotwords = phraseList.joinToString(", ")

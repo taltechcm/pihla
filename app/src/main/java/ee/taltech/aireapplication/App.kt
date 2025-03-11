@@ -109,6 +109,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         super.attachBaseContext(localeAppDelegate.attachBaseContext(base))
     }
 
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         localeAppDelegate.onConfigurationChanged(this)
@@ -161,8 +162,9 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
     }
 
+    // this only works on emulator
+    // https://developer.android.com/reference/android/app/Application#onTerminate()
     override fun onTerminate() {
-        super.onTerminate()
         //removeRobotListeners() //doesn't always work, should add welcome and end screens to app instead
 
         robot.stopFaceRecognition()
@@ -172,6 +174,8 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         applicationScope.launch {
             BackendApiKtorSingleton.logEvent(tag = TAG, message = "onTerminate")
         }
+
+        super.onTerminate()
     }
 
     private fun addListeners() {
