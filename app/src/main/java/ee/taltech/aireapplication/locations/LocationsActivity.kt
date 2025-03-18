@@ -84,7 +84,7 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DataRecyclerViewAdapter(
             this,
-            app.locationsRepository.getMapLocations(App.MAP_ID, locale = currentLocale)
+            app.locationsRepository.getMapLocations(App.MAP_ID, app.robot.getCurrentFloor()!!.name, locale = currentLocale)
             //app.robot.locations ?: listOf("None Yet")//names
         ) { location, _ ->
             run {

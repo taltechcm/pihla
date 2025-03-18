@@ -27,6 +27,7 @@ object C {
 
     val URL_EVENTLOG = getApiPrefix() + "api/v1/LogEvents/"
     val URL_LOCATIONS_SYNC = getApiPrefix() + "api/v1/MapLocations/"
+    val URL_LOCATIONS2_SYNC = getApiPrefix() + "api/v2/MapLocations/"
     val URL_NEWS = getApiPrefix() + "api/v1/News/"
     val URL_WEBLINKS = getApiPrefix() + "api/v1/WebLinks/"
     val URL_ARTICLES = getApiPrefix() + "api/v1/articles/"

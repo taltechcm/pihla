@@ -107,10 +107,10 @@ class PatrolActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
 
 
         patrolLocations =
-            app.locationsRepository.getPatrolLocations(App.MAP_ID, locale = currentLocale)
+            app.locationsRepository.getPatrolLocations(App.MAP_ID, app.robot.getCurrentFloor()!!.name, locale = currentLocale)
 
         homeBaseLocation =
-            app.locationsRepository.getHomeBaseLocation(App.MAP_ID, locale = currentLocale)
+            app.locationsRepository.getHomeBaseLocation(App.MAP_ID, app.robot.getCurrentFloor()!!.name, locale = currentLocale)
 
         // recyclerview setup
         recyclerView.layoutManager = LinearLayoutManager(this)

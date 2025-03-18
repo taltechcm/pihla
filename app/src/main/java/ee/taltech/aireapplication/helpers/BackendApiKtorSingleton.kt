@@ -1,10 +1,13 @@
 package ee.taltech.aireapplication.helpers
 
 import android.util.Log
+import com.robotemi.sdk.map.Floor
 import ee.taltech.aireapplication.App
 import ee.taltech.aireapplication.dto.AppVersion
 import ee.taltech.aireapplication.dto.Article
 import ee.taltech.aireapplication.dto.EventLog
+import ee.taltech.aireapplication.dto.Map2Sync
+import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import ee.taltech.aireapplication.dto.MapSync
 import ee.taltech.aireapplication.dto.NewsItem
@@ -104,6 +107,40 @@ object BackendApiKtorSingleton {
         }
     }
 
+
+    suspend fun syncMapLocationsToBackend2(
+        mapIdCode: String,
+        mapName: String,
+        floors: List<Floor>,
+    ): HttpResponse {
+        val url = C.URL_LOCATIONS2_SYNC + "?apikey=" + C.TEMI_BACKEND_API_KEY
+
+
+        val response: HttpResponse = client.post(url) {
+            setBody(
+                Map2Sync(
+                    mapIdCode = mapIdCode,
+                    mapName = mapName,
+                    mapFloors = floors.map { f ->
+                        Map2Sync.FloorSync(
+                            floorName = f.name,
+                            mapLocations = f.locations.map { l -> l.name }
+                        )
+                    }
+                )
+            )
+
+        }
+        if (!response.status.isSuccess()) {
+            Log.e(TAG, "syncMapLocationsToBackend2 response: " + response.bodyAsText())
+        } else {
+            Log.d(TAG, "syncMapLocationsToBackend2 response: " + response.bodyAsText())
+        }
+
+        return response
+    }
+
+
     suspend fun syncMapLocationsToBackend(
         mapIdCode: String,
         mapName: String,
@@ -148,6 +185,24 @@ object BackendApiKtorSingleton {
 
         return data
     }
+
+    suspend fun syncMapLocationsFromBackend2(): List<MapLocation2Sync> {
+        val url = C.URL_LOCATIONS2_SYNC + App.MAP_ID + "/" + "?apikey=" + C.TEMI_BACKEND_API_KEY
+        val response = client.get(url)
+
+        if (!response.status.isSuccess()) {
+            Log.e(TAG, "syncMapLocationsFromBackend response: " + response.bodyAsText())
+            return ArrayList()
+        } else {
+            Log.d(TAG, "syncMapLocationsFromBackend response: " + response.bodyAsText())
+
+        }
+
+        val data: List<MapLocation2Sync> = response.body()
+
+        return data
+    }
+
 
     suspend fun getArticle(articleTitle: String, date: Date?): Article? {
         var dateStr: String? = null

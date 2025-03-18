@@ -22,6 +22,7 @@ import androidx.core.content.FileProvider
 import androidx.preference.PreferenceManager
 import com.robotemi.sdk.permission.Permission
 import ee.taltech.aireapplication.App.Companion.applicationScope
+import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import ee.taltech.aireapplication.face.FaceActivity
 import ee.taltech.aireapplication.helpers.AsrService
@@ -660,15 +661,15 @@ class SettingsActivity : BaseActivity() {
 
     private fun syncLocationsToBackend() {
         applicationScope.launch {
-            val res = BackendApiKtorSingleton.syncMapLocationsToBackend(
+            val res = BackendApiKtorSingleton.syncMapLocationsToBackend2(
                 mapIdCode = App.MAP_ID,
                 mapName = App.MAP_NAME,
-                mapLocations = app.robot.locations
+                floors = app.robot.getAllFloors()
             )
 
             if (res.status.isSuccess()) {
                 app.showToast(app, "Locations synced to backend.\n" + res.bodyAsText())
-                syncLocationsFromBackend()
+                //syncLocationsFromBackend()
             } else {
                 app.showLongToast(app, "Locations NOT synced to backend!\n" + res.bodyAsText())
             }
@@ -676,13 +677,23 @@ class SettingsActivity : BaseActivity() {
     }
 
     private suspend fun syncLocationsFromBackend() {
-        val res = BackendApiKtorSingleton.syncMapLocationsFromBackend()
+        val res = BackendApiKtorSingleton.syncMapLocationsFromBackend2()
         if (res.isNotEmpty()) {
             app.showToast(app, "Locations synced from backend.")
-            saveLocations(res)
+            saveLocations2(res)
         } else {
             app.showLongToast(app, "Locations NOT synced from backend!")
         }
+    }
+
+    private fun saveLocations2(locations: List<MapLocation2Sync>) {
+        val jsonStr = Json.encodeToString(locations)
+        val appSharedPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
+        val prefsEditor: SharedPreferences.Editor = appSharedPrefs.edit()
+        prefsEditor.putString(App.MAP_ID, jsonStr)
+        prefsEditor.commit()
+
+        Log.d(TAG, "Locations saved to shared prefs. ${App.MAP_ID} $jsonStr")
     }
 
     private fun saveLocations(locations: List<MapLocationSync>) {

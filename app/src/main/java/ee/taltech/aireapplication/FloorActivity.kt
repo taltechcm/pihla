@@ -113,15 +113,20 @@ class FloorActivity : BaseActivity() {
         )
 
 
-        showPopup("Please wait, changing floor to: " + selectedFloor!!.name, 6000)
+        var wait = 20
+        val delay = 1000L
 
         applicationScope.launch {
+            var floor: Floor? = null
+            do {
+                showPopup(
+                    "Please wait, changing floor to: " + selectedFloor!!.name + " (" + wait + ")",
+                    1000
+                )
+                delay(delay)
+                floor = app.robot.getCurrentFloor()
 
-            // build a downloop here until floor is changed
-
-            delay(6000L)
-
-            var floor = app.robot.getCurrentFloor()
+            } while (app.robot.getCurrentFloor()!!.id != selectedFloor!!.id || wait > 0)
 
             if (floor == null) {
                 showPopup("No floor!", 4000)
