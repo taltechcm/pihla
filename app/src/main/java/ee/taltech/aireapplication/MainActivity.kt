@@ -28,6 +28,7 @@ import ee.taltech.aireapplication.helpers.C
 import ee.taltech.aireapplication.locations.LocationsActivity
 import ee.taltech.aireapplication.webview.WebViewActivity
 import com.zeugmasolutions.localehelper.Locales
+import com.zeugmasolutions.localehelper.currentLocale
 import ee.taltech.aireapplication.App.Companion.applicationScope
 import ee.taltech.aireapplication.face.FaceActivity
 import ee.taltech.aireapplication.games.GamesActivity
@@ -88,7 +89,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
         buttonRegisterFace = findViewById(R.id.buttonRegisterFace)
         buttonVideo = findViewById(R.id.buttonVideo)
         reposeButton = findViewById(R.id.reposeButton)
-        buttonPatrol= findViewById(R.id.buttonPatrol)
+        buttonPatrol = findViewById(R.id.buttonPatrol)
 
         textViewFloorInfo = findViewById(R.id.textViewFloorInfo)
 
@@ -185,6 +186,16 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
         ) View.VISIBLE else View.INVISIBLE
 
         // app.faceDetectionDisabled = false
+
+        if (app.locationsRepository != null) {
+            var patrolLocations = app.locationsRepository!!.getPatrolLocations(
+                App.MAP_ID,
+                app.robot.getCurrentFloor()!!.name,
+                locale = currentLocale
+            )
+            buttonPatrol.isEnabled = patrolLocations.isNotEmpty()
+        }
+
     }
 
 
@@ -774,6 +785,17 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
     override fun onRobotReady(isReady: Boolean) {
         textViewFloorInfo.text = app.robot.getCurrentFloor()?.name ?: "-"
+        if (isReady) {
+            applicationScope.launch {
+                delay(1000L)
+                var patrolLocations = app.locationsRepository!!.getPatrolLocations(
+                    App.MAP_ID,
+                    app.robot.getCurrentFloor()!!.name,
+                    locale = currentLocale
+                )
+                buttonPatrol.isEnabled = patrolLocations.isNotEmpty()
+            }
+        }
     }
 
 }

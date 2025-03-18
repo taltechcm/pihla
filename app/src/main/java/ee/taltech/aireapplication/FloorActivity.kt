@@ -151,4 +151,9 @@ class FloorActivity : BaseActivity() {
 
 
     }
+
+    fun settingsButtonReposeClicked(view: View) {
+        app.robot.repose()
+        app.showLongToast(this, getString(R.string.ReposeInfo))
+    }
 }

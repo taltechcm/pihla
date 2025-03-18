@@ -2,14 +2,19 @@ package ee.taltech.aireapplication.locations
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.preference.PreferenceManager
 import ee.taltech.aireapplication.domain.Location
 import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import kotlinx.serialization.json.Json
+import java.text.DecimalFormat
 import java.util.Locale
 
 class LocationsRepository(private val context: Context, private val systemLocations: List<String>) {
+    companion object {
+        private val TAG = this::class.java.declaringClass!!.simpleName
+    }
 
     fun getMapLocations(mapId: String, floorName: String, locale: Locale): List<Location> {
         // try to load saved location from backend
@@ -86,8 +91,15 @@ class LocationsRepository(private val context: Context, private val systemLocati
             )
         }
 
+        var savedLocations: List<MapLocation2Sync> = listOf()
+
         val savedLocationsJsonStr = appSharedPrefs.getString(mapId, "[]")
-        val savedLocations: List<MapLocation2Sync> = Json.decodeFromString(savedLocationsJsonStr!!)
+        try {
+            savedLocations  = Json.decodeFromString(savedLocationsJsonStr!!)
+
+        } catch (e:  kotlinx.serialization.MissingFieldException) {
+            Log.d(TAG, "MissingFieldException: $e")
+        }
 
         val locations = savedLocations
             .filter { l -> l.patrolPriority > 0 && l.floorName == floorName }

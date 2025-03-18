@@ -117,7 +117,7 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
     // app variables
     lateinit var robot: Robot
-    lateinit var locationsRepository: LocationsRepository
+    var locationsRepository: LocationsRepository? = null
 
 
     var doOnce = true
