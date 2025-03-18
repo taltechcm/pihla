@@ -49,10 +49,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:onClick="settingsButtonFloorClicked"
         android:text="@string/buttonfloor"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
+
+    <Button
+        android:id="@+id/settingsButtonRepose"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="settingsButtonReposeClicked"
+        android:text="@string/Repose"
+        android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/settingsButtonFloor"
         app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
 
 
@@ -66,7 +79,7 @@
         android:text="@string/register_face"
         android:textSize="34sp"
         android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/settingsButtonFloor"
+        app:layout_constraintStart_toEndOf="@+id/settingsButtonRepose"
         app:layout_constraintTop_toBottomOf="@+id/settingsCloseAppButton" />
 
 

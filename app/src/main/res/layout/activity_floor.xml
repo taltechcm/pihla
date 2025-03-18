@@ -103,10 +103,20 @@
         android:layout_marginTop="32dp"
         android:enabled="false"
         android:onClick="floorButtonActivateClicked"
-        android:text="Change to floor"
+        android:text="Change to floor..."
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floorRecyclerView" />
+
+    <TextView
+        android:id="@+id/textViewFloorChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/floorButtonActivate"
+        app:layout_constraintTop_toBottomOf="@+id/floorButtonActivate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

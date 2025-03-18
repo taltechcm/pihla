@@ -32,6 +32,7 @@ class FloorActivity : BaseActivity() {
     private lateinit var floorRecyclerView: RecyclerView
     private lateinit var floorTextViewCurrent: TextView
     private lateinit var floorTextViewLocations: TextView
+    private lateinit var textViewFloorChange: TextView
     private lateinit var floorButtonActivate: Button
     private lateinit var adapter: ObjectDataRecyclerViewAdapter<FloorDisplayItem>
     private var selectedFloor: Floor? = null
@@ -45,7 +46,10 @@ class FloorActivity : BaseActivity() {
         floorTextViewCurrent = findViewById(R.id.floorTextViewCurrent)
         floorTextViewLocations = findViewById(R.id.floorTextViewLocations)
         floorButtonActivate = findViewById(R.id.floorButtonActivate)
+        textViewFloorChange = findViewById(R.id.textViewFloorChange)
 
+
+        textViewFloorChange.text = ""
 
 
         floorRecyclerView = findViewById(R.id.floorRecyclerView)
@@ -60,7 +64,7 @@ class FloorActivity : BaseActivity() {
             run {
                 floorButtonActivate.isEnabled = true
                 floorButtonActivate.text =
-                    "Change to floor" + " " + adapterSelectedFloor.displayName
+                    "Change to floor " + adapterSelectedFloor.displayName
                 floorTextViewLocations.text =
                     adapterSelectedFloor.floor.locations.joinToString("\n") { l -> l.name }
                 selectedFloor = adapterSelectedFloor.floor
@@ -117,17 +121,17 @@ class FloorActivity : BaseActivity() {
         val delay = 1000L
 
         applicationScope.launch {
-            var floor: Floor? = null
+
             do {
-                showPopup(
-                    "Please wait, changing floor to: " + selectedFloor!!.name + " (" + wait + ")",
-                    1000
-                )
+                textViewFloorChange.text =
+                    "Please wait, changing floor to: " + selectedFloor!!.name + " (" + wait + ")"
                 delay(delay)
-                floor = app.robot.getCurrentFloor()
+                wait--
+            } while (app.robot.getCurrentFloor()!!.id != selectedFloor!!.id && wait > 0)
+            textViewFloorChange.text = ""
 
-            } while (app.robot.getCurrentFloor()!!.id != selectedFloor!!.id || wait > 0)
 
+            val floor = app.robot.getCurrentFloor()
             if (floor == null) {
                 showPopup("No floor!", 4000)
             } else {
@@ -138,6 +142,8 @@ class FloorActivity : BaseActivity() {
 
                     floorTextViewCurrent.text = floor.name
                     floorTextViewLocations.text = floor.locations.joinToString("\n") { l -> l.name }
+                    floorButtonActivate.isEnabled = false
+                    floorButtonActivate.text = "Change to floor..."
                 }
             }
 

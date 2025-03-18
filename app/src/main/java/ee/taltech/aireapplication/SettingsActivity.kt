@@ -618,6 +618,11 @@ class SettingsActivity : BaseActivity() {
         )
     }
 
+    fun settingsButtonReposeClicked(view: View) {
+        app.robot.repose()
+        app.showLongToast(this, getString(R.string.ReposeInfo))
+    }
+
     fun settingsCloseAppButtonOnClick(view: View) {
         val that = this
 
@@ -669,7 +674,7 @@ class SettingsActivity : BaseActivity() {
 
             if (res.status.isSuccess()) {
                 app.showToast(app, "Locations synced to backend.\n" + res.bodyAsText())
-                //syncLocationsFromBackend()
+                syncLocationsFromBackend()
             } else {
                 app.showLongToast(app, "Locations NOT synced to backend!\n" + res.bodyAsText())
             }
