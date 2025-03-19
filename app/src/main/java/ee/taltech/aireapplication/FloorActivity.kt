@@ -111,11 +111,23 @@ class FloorActivity : BaseActivity() {
     ) : TObjectDisplayName
 
     fun floorButtonActivateClicked(view: View) {
+
+        // try to find the "Lift" location from selected floor to use as initial position after floor change
+
+        val location = selectedFloor!!.locations.find { l -> l.name.uppercase() == "LIFT" }
+
+        if (location == null) {
+            app.showToast(this, "Location LIFT not found on selected floor, using first location instead")
+        } else {
+            app.showLongToast(this, "Using LIFT location as initial position on this floor. x:" + selectedFloor!!.locations[0].x + " y:" + selectedFloor!!.locations[0].y +  " yaw:" + selectedFloor!!.locations[0].yaw)
+        }
+
         app.robot.loadFloor(
             selectedFloor!!.id,
-            Position(selectedFloor!!.locations[0].x, selectedFloor!!.locations[0].y)
+            if (location == null)
+                Position(selectedFloor!!.locations[0].x, selectedFloor!!.locations[0].y,  selectedFloor!!.locations[0].yaw) else
+                Position(location.x, location.y, 0f)
         )
-
 
         var wait = 20
         val delay = 1000L
