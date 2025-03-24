@@ -790,7 +790,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
                 delay(1000L)
                 var patrolLocations = app.locationsRepository!!.getPatrolLocations(
                     App.MAP_ID,
-                    app.robot.getCurrentFloor()!!.name,
+                    app.robot.getCurrentFloor()?.name ?: "null",
                     locale = currentLocale
                 )
                 buttonPatrol.isEnabled = patrolLocations.isNotEmpty()
