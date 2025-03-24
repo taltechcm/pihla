@@ -17,5 +17,7 @@
     <color name="temi_primary_green_80">#cc20d199</color>
     <color name="transparent">#00000000</color>
     <color name="semiGray">#33bdbdbd</color>
+    <color name="lh_cyan">#3AC7D3</color>
+
 
 </resources>

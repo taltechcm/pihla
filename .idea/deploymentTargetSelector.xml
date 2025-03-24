@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-03-19T14:44:30.158368Z">
+        <DropdownSelection timestamp="2025-03-24T21:14:53.043478Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=10.224.32.227:5555;connection=783ac8fa" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/akaver/.android/avd/Temi3_API_30.avd" />
             </handle>
           </Target>
         </DropdownSelection>

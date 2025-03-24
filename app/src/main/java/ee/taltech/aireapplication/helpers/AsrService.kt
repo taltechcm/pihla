@@ -114,7 +114,7 @@ class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
 
         fun buildNotification(context: Context): Notification {
             return NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-                .setContentTitle("Pihlakodu")
+                .setContentTitle("Lastehaigla")
                 .setContentText("Temi is listening to the microphone")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)

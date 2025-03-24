@@ -32,6 +32,10 @@
         android:text="@string/FlowerGame"
         android:textSize="70sp"
         android:textStyle="bold"
+        android:background="@drawable/lh_mumm4"
+        android:paddingTop="36dp"
+        app:backgroundTint="@null"
+        android:backgroundTint="@null"
         app:layout_constraintStart_toEndOf="@+id/buttonNews"
         app:layout_constraintTop_toTopOf="@+id/buttonNews" />
 
@@ -40,7 +44,7 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="80dp"
         android:onClick="reposeButtonOnClick"
         android:text="@string/Repose"
         android:textSize="20sp"
@@ -69,6 +73,10 @@
         android:text="@string/News"
         android:textSize="70sp"
         android:textStyle="bold"
+        android:background="@drawable/lh_mumm3"
+        android:paddingTop="40dp"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/buttonGuide"
         app:layout_constraintStart_toEndOf="@+id/buttonGuide"
         app:layout_constraintTop_toTopOf="@+id/buttonGuide" />
@@ -95,53 +103,25 @@
         android:text="@string/Guide"
         android:textSize="70sp"
         android:textStyle="bold"
+        android:background="@drawable/lh_mumm1"
+        android:paddingTop="36dp"
+        android:backgroundTint="@null"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="295dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pihlakodu2" />
+        app:layout_constraintVertical_bias="0.36" />
+
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="279dp"
-        android:layout_height="188dp"
-        android:layout_marginStart="-30dp"
-        android:layout_marginTop="-16dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:srcCompat="@drawable/taltech_logo" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="-20dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/aire_logo" />
-
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="225dp"
-        android:layout_height="194dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-10dp"
+        android:layout_width="196dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="-64dp"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:srcCompat="@drawable/eu_money2" />
+        app:srcCompat="@drawable/taltech_logo" />
 
     <Button
         android:id="@+id/buttonLangEE"
@@ -161,15 +141,15 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="Settings"
         android:onClick="imageButtonSettings"
         android:scaleType="fitCenter"
         android:src="@drawable/settings"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonRegisterFace"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonRegisterFace"
         tools:srcCompat="@drawable/settings" />
 
     <Button
@@ -223,11 +203,12 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="16dp"
         android:text="@string/floor"
         android:textSize="50dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonSettings"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonSettings"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonSettings" />
 
     <TextView
         android:id="@+id/textViewFloorInfo"
@@ -238,6 +219,27 @@
         android:textSize="50dp"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/lhfooter" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="476dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lh_logo_4" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,9 @@
     <style name="TextField">
         <item name="android:textSize">34sp</item>
     </style>
+
+    <style name="button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/lh_cyan</item>
+    </style>
+
 </resources>

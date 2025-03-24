@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pihlakodu rakendus</string>
-    <string name="app_name_short">aire</string>
+    <string name="app_name">Lastehaigla</string>
+    <string name="app_name_short">laste</string>
 
     <string name="locations">Majajuht</string>
     <string name="info">Info</string>

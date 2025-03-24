@@ -3,6 +3,10 @@
     <style name="Base.Theme.aireapplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- change default button style-->
+        <item name="materialButtonStyle">@style/button</item>
+        <item name="buttonStyle">@style/button</item>
     </style>
 
     <style name="Theme.aireapplication" parent="Base.Theme.aireapplication" />
