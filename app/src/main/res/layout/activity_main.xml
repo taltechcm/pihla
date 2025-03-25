@@ -132,9 +132,8 @@
         android:text="EST"
         android:textColor="#000000"
         android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonLangEN"
-        app:layout_constraintStart_toStartOf="@+id/buttonLangEN"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLangEN" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonLangEN"
+        app:layout_constraintTop_toTopOf="@+id/buttonLangEN" />
 
     <ImageButton
         android:id="@+id/imageButtonSettings"

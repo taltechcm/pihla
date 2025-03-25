@@ -223,13 +223,13 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         var mapNameOverride = SettingsRepository.getString(
             this,
             "mapNameOverride",
-            ""
+            "tlh"
         )
 
         var robotNameOverride = SettingsRepository.getString(
             this,
             "robotNameOverride",
-            ""
+            "piret"
         )
 
         if (mapNameOverride.isNotEmpty()) {
