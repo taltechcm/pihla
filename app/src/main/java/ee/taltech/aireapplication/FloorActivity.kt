@@ -114,19 +114,24 @@ class FloorActivity : BaseActivity() {
 
         // try to find the "Lift" location from selected floor to use as initial position after floor change
 
-        val location = selectedFloor!!.locations.find { l -> l.name.uppercase() == "LIFT" }
+        var location = selectedFloor!!.locations.find { l -> l.name.uppercase() == "LIFT" }
 
         if (location == null) {
-            app.showToast(this, "Location LIFT not found on selected floor, using first location instead")
+            app.showToast(
+                this,
+                "Location LIFT not found on selected floor, using first location instead"
+            )
+            location = selectedFloor!!.locations[0]
         } else {
-            app.showLongToast(this, "Using LIFT location as initial position on this floor. x:" + selectedFloor!!.locations[0].x + " y:" + selectedFloor!!.locations[0].y +  " yaw:" + selectedFloor!!.locations[0].yaw)
+            app.showLongToast(
+                this,
+                "Using LIFT location as initial position on this floor. x:" + location.x + " y:" + location.y + " yaw:" + location.yaw
+            )
         }
 
         app.robot.loadFloor(
             selectedFloor!!.id,
-            if (location == null)
-                Position(selectedFloor!!.locations[0].x, selectedFloor!!.locations[0].y,  selectedFloor!!.locations[0].yaw) else
-                Position(location.x, location.y, 0f)
+            Position(location.x, location.y, location.yaw)
         )
 
         var wait = 20
@@ -136,7 +141,7 @@ class FloorActivity : BaseActivity() {
 
             do {
                 textViewFloorChange.text =
-                    "Please wait, changing floor to: " + selectedFloor!!.name + " (" + wait + ")"
+                    "Please wait, changing floor to: " + selectedFloor!!.name + " (" + wait + ")" + " loc:" + location!!.name + " x:" + location!!.x + " y:" + +location!!.y + " yaw:" + +location!!.yaw
                 delay(delay)
                 wait--
             } while (app.robot.getCurrentFloor()!!.id != selectedFloor!!.id && wait > 0)
@@ -150,7 +155,10 @@ class FloorActivity : BaseActivity() {
                 if (floor.name != selectedFloor!!.name) {
                     showPopup("Floor did not change.", 4000)
                 } else {
-                    showPopup("Floor changed to: " + floor.name, 4000)
+                    showPopup(
+                        "Floor changed to: " + floor.name + " pos: " + app.robot.getPosition(),
+                        10000
+                    )
 
                     floorTextViewCurrent.text = floor.name
                     floorTextViewLocations.text = floor.locations.joinToString("\n") { l -> l.name }
