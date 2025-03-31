@@ -194,6 +194,7 @@ class SettingsActivity : BaseActivity() {
                 "Version code: ${pInfo.longVersionCode}\n" +
                 "Version name: ${pInfo.versionName}\n" +
                 "Window: $width x $height \n" +
+                "Pos: ${app.robot.getPosition()}\n" +
                 "Multifloor: ${app.robot.isMultiFloorEnabled()}\n" +
                 app.robot.getAllFloors().map { f -> f.toString() }.joinToString("\n") + "\n" +
                 "Is real temi:${App.IS_REAL_TEMI}\n" +
