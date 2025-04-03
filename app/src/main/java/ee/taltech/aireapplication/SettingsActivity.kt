@@ -86,6 +86,8 @@ class SettingsActivity : BaseActivity() {
     private lateinit var faceDetectionPhrase4: EditText
 
 
+    private lateinit var locationsInUpperCase: CheckBox
+
     private lateinit var mainActivityButtonArticle1Visible: CheckBox
     private lateinit var mainActivityButtonArticle2Visible: CheckBox
     private lateinit var mainActivityButtonArticle3Visible: CheckBox
@@ -144,6 +146,8 @@ class SettingsActivity : BaseActivity() {
         faceDetectionPhrase2 = findViewById(R.id.faceDetectionPhrase2)
         faceDetectionPhrase3 = findViewById(R.id.faceDetectionPhrase3)
         faceDetectionPhrase4 = findViewById(R.id.faceDetectionPhrase4)
+
+        locationsInUpperCase = findViewById(R.id.locationsInUpperCase)
 
         mainActivityButtonArticle1Visible = findViewById(R.id.mainActivityButtonArticle1Visible)
 
@@ -361,6 +365,13 @@ class SettingsActivity : BaseActivity() {
         )
 
 
+        locationsInUpperCase.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "locationsInUpperCase",
+                resources.getBoolean(R.bool.locationsInUpperCase)
+            )
+
         mainActivityButtonArticle1Visible.isChecked =
             SettingsRepository.getBoolean(
                 this,
@@ -546,6 +557,11 @@ class SettingsActivity : BaseActivity() {
             faceDetectionPhrase4.text.toString()
         )
 
+        SettingsRepository.setBoolean(
+            this,
+            "locationsInUpperCase",
+            locationsInUpperCase.isChecked
+        )
 
         SettingsRepository.setBoolean(
             this,

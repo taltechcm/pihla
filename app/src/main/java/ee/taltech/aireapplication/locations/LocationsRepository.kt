@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.preference.PreferenceManager
+import ee.taltech.aireapplication.R
 import ee.taltech.aireapplication.domain.Location
 import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
+import ee.taltech.aireapplication.helpers.SettingsRepository
 import kotlinx.serialization.json.Json
 import java.text.DecimalFormat
 import java.util.Locale
@@ -15,6 +17,15 @@ class LocationsRepository(private val context: Context, private val systemLocati
     companion object {
         private val TAG = this::class.java.declaringClass!!.simpleName
     }
+
+    private fun locationsInUpper(): Boolean {
+        return SettingsRepository.getBoolean(
+            context,
+            "locationsInUpperCase",
+            context.resources.getBoolean(R.bool.locationsInUpperCase)
+        )
+    }
+
 
     fun getMapLocations(mapId: String, floorName: String, locale: Locale): List<Location> {
         // try to load saved location from backend
@@ -36,8 +47,8 @@ class LocationsRepository(private val context: Context, private val systemLocati
             .map { l ->
                 Location(
                     systemName = l.mapLocation,
-                    displayName = l.translations.find { t -> t.lang == locale.language }?.value
-                        ?: l.mapLocation,
+                    displayName = (l.translations.find { t -> t.lang == locale.language }?.value
+                        ?: l.mapLocation).let { if (locationsInUpper()) it.uppercase() else it},
                     sortPriority = l.sortPriority,
                     patrolPriority = l.patrolPriority
                 )
@@ -95,9 +106,9 @@ class LocationsRepository(private val context: Context, private val systemLocati
 
         val savedLocationsJsonStr = appSharedPrefs.getString(mapId, "[]")
         try {
-            savedLocations  = Json.decodeFromString(savedLocationsJsonStr!!)
+            savedLocations = Json.decodeFromString(savedLocationsJsonStr!!)
 
-        } catch (e:  kotlinx.serialization.MissingFieldException) {
+        } catch (e: kotlinx.serialization.MissingFieldException) {
             Log.d(TAG, "MissingFieldException: $e")
         }
 
@@ -107,8 +118,8 @@ class LocationsRepository(private val context: Context, private val systemLocati
             .map { l ->
                 Location(
                     systemName = l.mapLocation,
-                    displayName = l.translations.find { t -> t.lang == locale.language }?.value
-                        ?: l.mapLocation,
+                    displayName = (l.translations.find { t -> t.lang == locale.language }?.value
+                        ?: l.mapLocation).let { if (locationsInUpper()) it.uppercase() else it},
                     sortPriority = l.sortPriority,
                     patrolPriority = l.patrolPriority
                 )
@@ -171,8 +182,8 @@ class LocationsRepository(private val context: Context, private val systemLocati
             .map { l ->
                 Location(
                     systemName = l.mapLocation,
-                    displayName = l.translations.find { t -> t.lang == locale.language }?.value
-                        ?: l.mapLocation,
+                    displayName = (l.translations.find { t -> t.lang == locale.language }?.value
+                        ?: l.mapLocation).let { if (locationsInUpper()) it.uppercase() else it},
                     sortPriority = l.sortPriority,
                     patrolPriority = l.patrolPriority
                 )

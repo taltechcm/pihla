@@ -151,7 +151,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
         buttonArticle3.visibility = if (SettingsRepository.getBoolean(
                 this,
-                "mainActivityButtonArticle3",
+                "mainActivityDisplayVaria",
                 resources.getBoolean(R.bool.mainActivityButtonArticle3Visible)
             )
         ) View.VISIBLE else View.INVISIBLE
