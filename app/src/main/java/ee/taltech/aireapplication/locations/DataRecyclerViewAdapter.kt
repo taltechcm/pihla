@@ -27,7 +27,7 @@ class DataRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val rowView = layoutInflater.inflate(R.layout.locations_row, parent, false)
         rowView.layoutParams =
-            ViewGroup.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, 128)
+            ViewGroup.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, 180)
 
         return ViewHolder(rowView)
     }
