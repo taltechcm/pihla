@@ -178,6 +178,8 @@
     <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Kasuta seda fraasi</string>
     <string name="floor">Korrus:</string>
     <string name="buttonfloor">Korrused</string>
-
+    <string name="go_to_location_settings">Asukohta mineku seaded</string>
+    <string name="gotoLocationReturnHomeDelay">20</string>
+    <string name="returning_home_cancel">Pöördun koju (%s%) - KATKESTA</string>
 
 </resources>

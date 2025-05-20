@@ -272,5 +272,8 @@
     <string name="display_button_patrol_on_main_activity">Show \'Patrol\' button in main screen</string>
     <string name="floor">Floor:</string>
     <string name="buttonfloor">Floors</string>
+    <string name="go_to_location_settings">Go To Location settings</string>
+    <string name="gotoLocationReturnHomeDelay">20</string>
+    <string name="returning_home_cancel">RETURNING HOME (%s%) - CANCEL</string>
 
 </resources>

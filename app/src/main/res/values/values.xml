@@ -19,4 +19,7 @@
     <bool name="mainActivityDisplayButtonRepose">false</bool>
     <bool name="mainActivityDisplayButtonPatrol">true</bool>
 
+    <bool name="gotoLocationCheckboxReturnHome">true</bool>
+
+    <integer name="gotoLocationReturnHomeDelay">20</integer>
 </resources>
