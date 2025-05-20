@@ -196,6 +196,12 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
             buttonPatrol.isEnabled = patrolLocations.isNotEmpty()
         }
 
+
+        SettingsRepository.setInt(
+            this,
+            "gotoLocationReturnHomeDelay",
+            resources.getInteger(R.integer.gotoLocationReturnHomeDelay)
+        )
     }
 
 

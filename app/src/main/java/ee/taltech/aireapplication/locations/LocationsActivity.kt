@@ -4,7 +4,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.robotemi.sdk.Robot
@@ -22,10 +25,12 @@ import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
 import ee.taltech.aireapplication.helpers.BaseActivity
 import ee.taltech.aireapplication.helpers.C
 import ee.taltech.aireapplication.helpers.CustomAsrListener
+import ee.taltech.aireapplication.helpers.SettingsRepository
 import ee.taltech.aireapplication.webview.WebViewActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Locale
 import kotlin.math.floor
 
 
@@ -49,6 +54,8 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
     private lateinit var locationsButtonBack: Button
     private lateinit var locationsButtonStop: Button
     private lateinit var locationsButtonStartNavigation: Button
+    private lateinit var buttonCancelReturnHome: Button
+
     private lateinit var locationTextViewDistanceToGo: TextView
 
     private lateinit var locationsTextViewLocation: TextView
@@ -65,6 +72,12 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
     private var currentLocation = ""
     private var currentLocationText = ""
 
+    private var returnHomeAfterArrival = true
+    private var returnHomeAfterArrivalDelay = 20
+    private var returnHomeAfterArrivalDelayCounter = 20
+
+    private var returnHomeAfterArrivalCanceled = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_locations)
@@ -72,7 +85,8 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         locationsButtonBack = findViewById(R.id.locationsButtonReturn)
         locationsButtonStop = findViewById(R.id.locationsButtonStop)
         locationsButtonStartNavigation = findViewById(R.id.locationsButtonStartNavigation)
-
+        buttonCancelReturnHome = findViewById(R.id.buttonCancelReturnHome)
+        buttonCancelReturnHome.isVisible = false
 
         locationsTextViewLocation = findViewById(R.id.locationsTextViewNavigatingToLocation)
         locationsTextViewLocation.text = ""
@@ -84,13 +98,26 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = DataRecyclerViewAdapter(
             this,
-            app.locationsRepository!!.getMapLocations(App.MAP_ID, app.robot.getCurrentFloor()!!.name, locale = currentLocale)
+            app.locationsRepository!!.getMapLocations(
+                App.MAP_ID,
+                app.robot.getCurrentFloor()!!.name,
+                locale = currentLocale
+            )
             //app.robot.locations ?: listOf("None Yet")//names
         ) { location, _ ->
             run {
                 currentLocation = location.systemName
                 currentLocationText = location.displayName
                 myLocation = location.systemName
+
+                locationsButtonStop.isEnabled = false
+                locationsButtonStop.isVisible = false
+
+                returnHomeAfterArrivalCanceled = true
+                buttonCancelReturnHome.isVisible = false
+
+                returnHomeAfterArrivalDelayCounter = returnHomeAfterArrivalDelay
+
                 updateLocationInfo(location)
             }
         }
@@ -106,6 +133,19 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
 
 
         locationsButtonStop.isEnabled = false
+        locationsButtonStop.isVisible = false
+
+
+        returnHomeAfterArrival = SettingsRepository.getBoolean(
+            this,
+            "gotoLocationCheckboxReturnHome",
+            resources.getBoolean(R.bool.gotoLocationCheckboxReturnHome)
+        )
+        returnHomeAfterArrivalDelay = SettingsRepository.getInt(
+            this,
+            "gotoLocationReturnHomeDelay",
+            Integer.parseInt(getString(R.string.gotoLocationReturnHomeDelay))
+        )
 
 
     }
@@ -263,6 +303,8 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
                 isGoing = false
                 //app.robot.constraintBeWith()
                 locationsButtonBack.isEnabled = true
+                locationsButtonStop.isEnabled = false
+                locationsButtonStop.isVisible = false
                 locationTextViewDistanceToGo.visibility = View.INVISIBLE
 
                 // TODO: Shall we finish here? Or pause and go home? Or stay in activity?
@@ -270,7 +312,19 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
                 // start timer to return to home
                 // time from settings. two buttons: cancel and start immediately
 
+                if (returnHomeAfterArrival && currentLocation.lowercase() != "home base") {
 
+                    returnHomeAfterArrivalDelayCounter = returnHomeAfterArrivalDelay
+                    buttonCancelReturnHome.text = getString(R.string.returning_home_cancel).replace(
+                        "%s%",
+                        returnHomeAfterArrivalDelayCounter.toString()
+                    )
+
+                    buttonCancelReturnHome.isVisible = true
+                    returnHomeAfterArrivalCanceled = false
+
+                    returnHomeDelayer()
+                }
             }
 
             "abort" -> {
@@ -296,6 +350,55 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
         }
     }
 
+    private fun returnHomeDelayer() {
+        if (returnHomeAfterArrivalDelayCounter <= 0) return
+
+        applicationScope.launch {
+
+            delay(1000L)
+            returnHomeAfterArrivalDelayCounter--
+            buttonCancelReturnHome.text = getString(R.string.returning_home_cancel).replace(
+                "%s%",
+                returnHomeAfterArrivalDelayCounter.toString()
+            )
+
+
+            if (returnHomeAfterArrivalDelayCounter <= 0 && !returnHomeAfterArrivalCanceled) {
+
+                val homeLocation = app.locationsRepository!!.getHomeBaseLocation(
+                    App.MAP_ID,
+                    app.robot.getCurrentFloor()!!.name,
+                    locale = currentLocale
+                )
+
+                buttonCancelReturnHome.isVisible = false
+
+                currentLocation = homeLocation!!.systemName
+                currentLocationText = homeLocation.displayName
+                myLocation = homeLocation.systemName
+                updateLocationInfo(homeLocation)
+                returnHomeAfterArrivalCanceled = false
+
+                startNavigation()
+                locationsButtonStop.text = getString(R.string.stop)
+                locationsButtonBack.isEnabled = false
+                locationsButtonStop.isEnabled = true
+                locationsButtonStop.isVisible = true
+                stopMode = true
+
+            } else {
+                if (!returnHomeAfterArrivalCanceled) {
+                    returnHomeDelayer()
+                }
+            }
+        }
+    }
+
+    fun buttonCancelReturnHomeClicked(view: View) {
+        returnHomeAfterArrivalCanceled = true
+        buttonCancelReturnHome.isVisible = false
+    }
+
 
     fun locationsButtonStartNavigationOnClick(view: View) {
         applicationScope.launch {
@@ -305,9 +408,9 @@ class LocationsActivity : BaseActivity(), OnGoToLocationStatusChangedListener,
             )
         }
 
-
         startNavigation()
         locationsButtonStop.isEnabled = true
+        locationsButtonStop.isVisible = true
         stopMode = true
         locationsButtonStop.text = getString(R.string.stop)
     }

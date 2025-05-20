@@ -96,7 +96,7 @@ class SettingsActivity : BaseActivity() {
 
     private lateinit var mainActivityDisplayButtonVideo: CheckBox
     private lateinit var mainActivityDisplayButtonRepose: CheckBox
-    private lateinit var  mainActivityDisplayButtonPatrol: CheckBox
+    private lateinit var mainActivityDisplayButtonPatrol: CheckBox
 
     private lateinit var textViewRobotDetails: TextView
 
@@ -105,6 +105,9 @@ class SettingsActivity : BaseActivity() {
     private lateinit var robotNameOverride: EditText
     private lateinit var mapNameOverride: EditText
     private lateinit var personalizeFaceDetectionMessages: CheckBox
+
+    private lateinit var gotoLocationCheckboxReturnHome: CheckBox
+    private lateinit var gotoLocationReturnHomeDelay: EditText
 
     private lateinit var settingsPassword: EditText
 
@@ -158,7 +161,7 @@ class SettingsActivity : BaseActivity() {
 
         mainActivityDisplayButtonVideo = findViewById(R.id.mainActivityDisplayButtonVideo)
         mainActivityDisplayButtonRepose = findViewById(R.id.mainActivityDisplayButtonRepose)
-        mainActivityDisplayButtonPatrol= findViewById(R.id.mainActivityDisplayButtonPatrol)
+        mainActivityDisplayButtonPatrol = findViewById(R.id.mainActivityDisplayButtonPatrol)
 
         activationPhrase = findViewById(R.id.activationPhrase)
 
@@ -166,6 +169,9 @@ class SettingsActivity : BaseActivity() {
         robotNameOverride = findViewById(R.id.robotNameOverride)
         mapNameOverride = findViewById(R.id.mapNameOverride)
         personalizeFaceDetectionMessages = findViewById(R.id.personalizeFaceDetectionMessages)
+
+        gotoLocationCheckboxReturnHome = findViewById(R.id.gotoLocationCheckboxReturnHome)
+        gotoLocationReturnHomeDelay = findViewById(R.id.gotoLocationReturnHomeDelay)
 
         textViewRobotDetails = findViewById(R.id.textViewRobotDetails)
 
@@ -460,6 +466,22 @@ class SettingsActivity : BaseActivity() {
                 resources.getBoolean(R.bool.personalizeFaceDetectionMessages)
             )
 
+        gotoLocationCheckboxReturnHome.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "gotoLocationCheckboxReturnHome",
+                resources.getBoolean(R.bool.gotoLocationCheckboxReturnHome)
+            )
+        gotoLocationReturnHomeDelay.setText(
+            SettingsRepository.getInt(
+                this,
+                "gotoLocationReturnHomeDelay",
+                resources.getInteger(R.integer.gotoLocationReturnHomeDelay)
+            ).toString()
+        )
+
+
+
         settingsPassword.setText(
             SettingsRepository.getString(
                 this,
@@ -627,6 +649,18 @@ class SettingsActivity : BaseActivity() {
             "personalizeFaceDetectionMessages",
             personalizeFaceDetectionMessages.isChecked
         )
+
+        SettingsRepository.setBoolean(
+            this,
+            "gotoLocationCheckboxReturnHome",
+            gotoLocationCheckboxReturnHome.isChecked
+        )
+        SettingsRepository.setInt(
+            this,
+            "gotoLocationReturnHomeDelay",
+            Integer.parseInt(gotoLocationReturnHomeDelay.text.toString())
+        )
+
 
         SettingsRepository.setString(
             this,

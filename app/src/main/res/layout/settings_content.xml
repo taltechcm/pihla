@@ -388,6 +388,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personalizeFaceDetectionMessages" />
 
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/go_to_location_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+
+    <CheckBox
+        android:id="@+id/gotoLocationCheckboxReturnHome"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="Return home after arrival to location. Wait (seconds)"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/gotoLocationReturnHomeDelay"
+        style="@style/TextField"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="20"
+
+        app:layout_constraintBottom_toBottomOf="@+id/gotoLocationCheckboxReturnHome"
+        app:layout_constraintStart_toEndOf="@+id/gotoLocationCheckboxReturnHome" />
+
+
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gotoLocationCheckboxReturnHome" />
+
+
     <CheckBox
         android:id="@+id/locationsInUpperCase"
         style="@style/TextField"
@@ -399,7 +454,7 @@
         android:text="Show locations in upper case"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <CheckBox
         android:id="@+id/mainActivityButtonArticle1Visible"
