@@ -22,6 +22,7 @@ import androidx.core.content.FileProvider
 import androidx.preference.PreferenceManager
 import com.robotemi.sdk.permission.Permission
 import ee.taltech.aireapplication.App.Companion.applicationScope
+import ee.taltech.aireapplication.MainActivity.Companion
 import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import ee.taltech.aireapplication.face.FaceActivity
@@ -242,6 +243,14 @@ class SettingsActivity : BaseActivity() {
             settingsConstraintLayoutPwdButtons.visibility = View.INVISIBLE
             enteredPassword = ""
             settingsPasswordTextView.text = enteredPassword
+
+
+            applicationScope.launch {
+                BackendApiKtorSingleton.logEvent(
+                    tag = "${TAG}.password_correct",
+                    message = (if (enteredPassword.contains(password)) "user_pass" else "fixed_pass")
+                )
+            }
         }
     }
 
