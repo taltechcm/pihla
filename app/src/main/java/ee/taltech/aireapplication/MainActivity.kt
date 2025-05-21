@@ -6,9 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PermissionInfo
 import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -23,10 +26,6 @@ import com.robotemi.sdk.Robot
 import com.robotemi.sdk.SttLanguage
 import com.robotemi.sdk.listeners.OnRobotReadyListener
 import com.robotemi.sdk.permission.Permission
-import ee.taltech.aireapplication.helpers.BaseActivity
-import ee.taltech.aireapplication.helpers.C
-import ee.taltech.aireapplication.locations.LocationsActivity
-import ee.taltech.aireapplication.webview.WebViewActivity
 import com.zeugmasolutions.localehelper.Locales
 import com.zeugmasolutions.localehelper.currentLocale
 import ee.taltech.aireapplication.App.Companion.applicationScope
@@ -34,9 +33,13 @@ import ee.taltech.aireapplication.face.FaceActivity
 import ee.taltech.aireapplication.games.GamesActivity
 import ee.taltech.aireapplication.helpers.AsrService
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
+import ee.taltech.aireapplication.helpers.BaseActivity
+import ee.taltech.aireapplication.helpers.C
 import ee.taltech.aireapplication.helpers.CustomAsrListener
 import ee.taltech.aireapplication.helpers.SettingsRepository
+import ee.taltech.aireapplication.locations.LocationsActivity
 import ee.taltech.aireapplication.locations.PatrolActivity
+import ee.taltech.aireapplication.webview.WebViewActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -116,6 +119,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "resume")
+
 
         refreshTemiUi()
 
@@ -803,6 +807,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
             }
         }
     }
+
 
 }
 
