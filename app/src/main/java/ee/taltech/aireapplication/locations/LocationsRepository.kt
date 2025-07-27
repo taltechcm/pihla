@@ -9,6 +9,7 @@ import ee.taltech.aireapplication.domain.Location
 import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import ee.taltech.aireapplication.helpers.SettingsRepository
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import java.text.DecimalFormat
 import java.util.Locale
@@ -91,6 +92,7 @@ class LocationsRepository(private val context: Context, private val systemLocati
         return locations
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     fun getPatrolLocations(mapId: String, floorName: String, locale: Locale): List<Location> {
         // try to load saved location from backend
         val appSharedPrefs: SharedPreferences =

@@ -461,21 +461,21 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
                 cls = LocationsActivity::class.java,
                 speakStr = getString(R.string.Guide),
                 logTAG = "$TAG.onAsrResult",
-                logMessage = "launch ${LocationsActivity.javaClass.simpleName}"
+                logMessage = "launch ${LocationsActivity::class.java.javaClass.simpleName}"
             )
 
             "patrol" -> launchActivity(
                 cls = PatrolActivity::class.java,
                 speakStr = getString(R.string.Patrol),
                 logTAG = "$TAG.onAsrResult",
-                logMessage = "launch ${PatrolActivity.javaClass.simpleName}"
+                logMessage = "launch ${PatrolActivity::class.java.javaClass.simpleName}"
             )
 
             "news" -> launchActivity(
                 cls = NewsActivity::class.java,
                 speakStr = getString(R.string.News),
                 logTAG = "$TAG.onAsrResult",
-                logMessage = "launch ${NewsActivity.javaClass.simpleName}"
+                logMessage = "launch ${NewsActivity::class.java.javaClass.simpleName}"
             )
 
             /*
