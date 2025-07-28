@@ -77,8 +77,14 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
     // app lifecycles
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Main activity should not autoclose after inactivity
+        closeActivityAfterInactivity = false
+
+
 
         Log.d(TAG, "create")
 

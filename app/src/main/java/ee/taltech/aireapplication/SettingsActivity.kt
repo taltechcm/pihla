@@ -30,7 +30,6 @@ import ee.taltech.aireapplication.helpers.AsrService
 import ee.taltech.aireapplication.helpers.BackendApiKtorSingleton
 import ee.taltech.aireapplication.helpers.BaseActivity
 import ee.taltech.aireapplication.helpers.SettingsRepository
-import ee.taltech.aireapplication.helpers.VolumeChangeReceiver.Companion.am
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.delay
@@ -122,9 +121,13 @@ class SettingsActivity : BaseActivity() {
     private lateinit var returnToMainScreenAfterInactivity: CheckBox
     private lateinit var returnToMainScreenAfterInactivitySeconds: EditText
 
+    private lateinit var am: AudioManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        am = getSystemService(AUDIO_SERVICE) as AudioManager
 
         settingsLayout = findViewById(R.id.settingsLayout)
         settingsConstraintLayoutPwdButtons = findViewById(R.id.settingsConstraintLayoutPwdButtons)
@@ -735,7 +738,7 @@ class SettingsActivity : BaseActivity() {
             Integer.parseInt(fixAudioVolumeAudioLevel.text.toString())
         )
 
-        if (fixAudioVolume.isChecked) {
+        if (fixAudioVolume.isChecked && am != null) {
             am!!.setStreamVolume(AudioManager.STREAM_MUSIC, Integer.parseInt(fixAudioVolumeAudioLevel.text.toString()), FLAG_REMOVE_SOUND_AND_VIBRATE)
         }
 
