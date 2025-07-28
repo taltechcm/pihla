@@ -20,6 +20,7 @@ import ee.taltech.aireapplication.R
 import com.konovalov.vad.silero.config.SampleRate
 import com.konovalov.vad.silero.config.FrameSize
 import com.konovalov.vad.silero.config.Mode
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -32,6 +33,7 @@ https://github.com/liam-mceneaney/androidwhisper.cpp/tree/master
 
 */
 
+@OptIn(DelicateCoroutinesApi::class)
 class AsrService : Service(), VoiceRecorder.AudioCallback, WebSocketListener {
     companion object {
         private val TAG = this::class.java.declaringClass!!.simpleName

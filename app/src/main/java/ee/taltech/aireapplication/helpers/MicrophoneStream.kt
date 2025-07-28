@@ -22,9 +22,9 @@ class MicrophoneStream : PullAudioInputStreamCallback() {
         this.initMic()
     }
 
-    override fun read(bytes: ByteArray): Int {
+    override fun read(dataBuffer: ByteArray): Int {
         if (recorder != null) {
-            val ret = recorder!!.read(bytes, 0, bytes.size)
+            val ret = recorder!!.read(dataBuffer, 0, dataBuffer.size)
             return ret
         }
         return 0

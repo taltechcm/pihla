@@ -21,5 +21,12 @@
 
     <bool name="gotoLocationCheckboxReturnHome">true</bool>
 
+    <bool name="fixAudioVolume">true</bool>
+    <integer name="fixAudioVolumeAudioLevel">5</integer>
+
+
+    <bool name="returnToMainScreenAfterInactivity">true</bool>
+    <integer name="returnToMainScreenAfterInactivitySeconds">60</integer>
+
     <integer name="gotoLocationReturnHomeDelay">20</integer>
 </resources>

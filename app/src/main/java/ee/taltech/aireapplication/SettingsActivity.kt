@@ -4,10 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageInfo
+import android.media.AudioManager
+import android.media.AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.WindowMetrics
@@ -22,7 +23,6 @@ import androidx.core.content.FileProvider
 import androidx.preference.PreferenceManager
 import com.robotemi.sdk.permission.Permission
 import ee.taltech.aireapplication.App.Companion.applicationScope
-import ee.taltech.aireapplication.MainActivity.Companion
 import ee.taltech.aireapplication.dto.MapLocation2Sync
 import ee.taltech.aireapplication.dto.MapLocationSync
 import ee.taltech.aireapplication.face.FaceActivity
@@ -34,7 +34,6 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
@@ -116,9 +115,19 @@ class SettingsActivity : BaseActivity() {
     private lateinit var settingsProgressBarUpdate: ProgressBar
 
 
+    private lateinit var fixAudioVolume: CheckBox
+    private lateinit var fixAudioVolumeAudioLevel: EditText
+
+    private lateinit var returnToMainScreenAfterInactivity: CheckBox
+    private lateinit var returnToMainScreenAfterInactivitySeconds: EditText
+
+    private lateinit var am: AudioManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        am = getSystemService(AUDIO_SERVICE) as AudioManager
 
         settingsLayout = findViewById(R.id.settingsLayout)
         settingsConstraintLayoutPwdButtons = findViewById(R.id.settingsConstraintLayoutPwdButtons)
@@ -180,6 +189,15 @@ class SettingsActivity : BaseActivity() {
 
         settingsProgressBarUpdate = findViewById(R.id.settingsProgressBarUpdate)
         settingsProgressBarUpdate.visibility = View.INVISIBLE
+
+
+        fixAudioVolume = findViewById(R.id.fixAudioVolume)
+        fixAudioVolumeAudioLevel = findViewById(R.id.fixAudioVolumeAudioLevel)
+
+        returnToMainScreenAfterInactivity = findViewById(R.id.returnToMainScreenAfterInactivity)
+        returnToMainScreenAfterInactivitySeconds =
+            findViewById(R.id.returnToMainScreenAfterInactivitySeconds)
+
 
         loadSavedValues()
 
@@ -498,6 +516,38 @@ class SettingsActivity : BaseActivity() {
                 "012345"
             )
         )
+
+
+
+        fixAudioVolume.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "fixAudioVolume",
+                resources.getBoolean(R.bool.fixAudioVolume)
+            )
+        fixAudioVolumeAudioLevel.setText(
+            SettingsRepository.getInt(
+                this,
+                "fixAudioVolumeAudioLevel",
+                resources.getInteger(R.integer.fixAudioVolumeAudioLevel)
+            ).toString()
+        )
+
+        returnToMainScreenAfterInactivity.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "returnToMainScreenAfterInactivity",
+                resources.getBoolean(R.bool.returnToMainScreenAfterInactivity)
+            )
+        returnToMainScreenAfterInactivitySeconds.setText(
+            SettingsRepository.getInt(
+                this,
+                "returnToMainScreenAfterInactivitySeconds",
+                resources.getInteger(R.integer.returnToMainScreenAfterInactivitySeconds)
+            ).toString()
+        )
+
+
     }
 
     private fun saveValues() {
@@ -668,6 +718,39 @@ class SettingsActivity : BaseActivity() {
             this,
             "gotoLocationReturnHomeDelay",
             Integer.parseInt(gotoLocationReturnHomeDelay.text.toString())
+        )
+
+
+
+
+
+
+
+
+        SettingsRepository.setBoolean(
+            this,
+            "fixAudioVolume",
+            fixAudioVolume.isChecked
+        )
+        SettingsRepository.setInt(
+            this,
+            "fixAudioVolumeAudioLevel",
+            Integer.parseInt(fixAudioVolumeAudioLevel.text.toString())
+        )
+
+        if (fixAudioVolume.isChecked && am != null) {
+            am!!.setStreamVolume(AudioManager.STREAM_MUSIC, Integer.parseInt(fixAudioVolumeAudioLevel.text.toString()), FLAG_REMOVE_SOUND_AND_VIBRATE)
+        }
+
+        SettingsRepository.setBoolean(
+            this,
+            "returnToMainScreenAfterInactivity",
+            returnToMainScreenAfterInactivity.isChecked
+        )
+        SettingsRepository.setInt(
+            this,
+            "returnToMainScreenAfterInactivitySeconds",
+            Integer.parseInt(returnToMainScreenAfterInactivitySeconds.text.toString())
         )
 
 

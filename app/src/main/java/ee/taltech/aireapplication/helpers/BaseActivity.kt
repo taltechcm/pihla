@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.PopupWindow
@@ -29,6 +30,9 @@ import ee.taltech.aireapplication.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 
 open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListener,
     Robot.WakeupWordListener,
@@ -49,6 +53,13 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
 
     protected var ttsStatus: TtsRequest.Status = TtsRequest.Status.COMPLETED
     protected var wakeupWordDetected = false
+
+
+    private var  scheduler : ScheduledExecutorService? = null
+    protected var closeActivityAfterInactivity = true
+    // TODO: get the delay from settings
+    protected var closeActivityAfterInactivityDelay = 30 // in seconds
+    private var closeActivityAfterInactivityCounter = closeActivityAfterInactivityDelay
 
     override fun getDelegate() = localeDelegate.getAppCompatDelegate(super.getDelegate())
 
@@ -95,6 +106,22 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         )
         animationOverlayStatusText = animationView.findViewById(R.id.textViewAnimationStatus)
         animationOverlayStatusText.text = ""
+
+
+        closeActivityAfterInactivity = SettingsRepository.getBoolean(
+            this,
+            "returnToMainScreenAfterInactivity",
+            true
+        )
+
+        closeActivityAfterInactivityDelay = SettingsRepository.getInt(
+            this,
+            "returnToMainScreenAfterInactivitySeconds",
+            300
+        )
+        closeActivityAfterInactivityCounter = closeActivityAfterInactivityDelay
+
+
     }
 
     override fun onResume() {
@@ -118,6 +145,10 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
             }
         }
 
+        if (closeActivityAfterInactivity) {
+            startCountdownTimer()
+        }
+
     }
 
     override fun onPause() {
@@ -129,6 +160,8 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         app.robot.removeOnFaceRecognizedListener(this)
 
         localeDelegate.onPaused()
+
+        scheduler?.shutdownNow()
     }
 
     override fun onDestroy() {
@@ -351,5 +384,29 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         }
     }
 
+
+    fun startCountdownTimer() {
+        scheduler =  Executors.newScheduledThreadPool(1)
+
+        scheduler?.scheduleWithFixedDelay({
+            try {
+                closeActivityAfterInactivityCounter--
+                Log.d("scheduleWithFixedDelay", "$closeActivityAfterInactivityCounter")
+
+                if (closeActivityAfterInactivityCounter <= 0) {
+                    scheduler?.shutdownNow()
+                    finish()
+                }
+            } catch (e: Exception) {
+                Log.e("e", e.message ?: "foo");
+            }
+        }, 0, 1, TimeUnit.SECONDS)
+    }
+
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        closeActivityAfterInactivityCounter = closeActivityAfterInactivityDelay
+        return super.dispatchTouchEvent(ev)
+    }
 
 }

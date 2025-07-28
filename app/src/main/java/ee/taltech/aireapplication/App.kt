@@ -40,6 +40,7 @@ import ee.taltech.aireapplication.helpers.BroadcastReceiverInActivity
 import ee.taltech.aireapplication.helpers.C
 import ee.taltech.aireapplication.helpers.CustomAsrListener
 import ee.taltech.aireapplication.helpers.SettingsRepository
+import ee.taltech.aireapplication.helpers.VolumeChangeReceiver
 import ee.taltech.aireapplication.locations.LocationsRepository
 import kotlinx.coroutines.MainScope
 import java.util.UUID
@@ -105,6 +106,10 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
 
     private val localeAppDelegate = LocaleHelperApplicationDelegate()
 
+    public val volumeChangeReceiver = VolumeChangeReceiver()
+    public val volumeChangeReceiverIntentFilter =
+        IntentFilter(VolumeChangeReceiver.Companion.VOLUME_CHANGED_ACTION)
+
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(localeAppDelegate.attachBaseContext(base))
     }
@@ -158,7 +163,11 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(broadcastReceiver, broadcastReceiverIntentFilter)
 
-
+        // global receiver
+        registerReceiver(
+            volumeChangeReceiver,
+            volumeChangeReceiverIntentFilter
+        )
 
     }
 
@@ -349,7 +358,6 @@ class App : Application(), OnSdkExceptionListener, OnGoToLocationStatusChangedLi
     }
 
 */
-
 
 
     /*

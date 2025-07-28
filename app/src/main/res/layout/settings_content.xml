@@ -552,6 +552,64 @@
         app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonVideo" />
 
 
+    <CheckBox
+        android:id="@+id/fixAudioVolume"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="Fix audio level to "
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonRepose" />
+
+    <EditText
+        android:id="@+id/fixAudioVolumeAudioLevel"
+        style="@style/TextField"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="5"
+
+        app:layout_constraintBottom_toBottomOf="@+id/fixAudioVolume"
+        app:layout_constraintStart_toEndOf="@+id/fixAudioVolume" />
+
+
+    <CheckBox
+        android:id="@+id/returnToMainScreenAfterInactivity"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="Return tom home screen after inactivity (seconds)"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fixAudioVolumeAudioLevel" />
+
+    <EditText
+        android:id="@+id/returnToMainScreenAfterInactivitySeconds"
+        style="@style/TextField"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="-10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="60"
+
+        app:layout_constraintBottom_toBottomOf="@+id/returnToMainScreenAfterInactivity"
+        app:layout_constraintStart_toEndOf="@+id/returnToMainScreenAfterInactivity" />
+
+
+
+
 
     <TextView
         android:id="@+id/textView7"
@@ -562,7 +620,7 @@
         android:layout_marginTop="16dp"
         android:text="Settings password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainActivityDisplayButtonRepose" />
+        app:layout_constraintTop_toBottomOf="@+id/returnToMainScreenAfterInactivity" />
 
 
     <EditText
@@ -641,6 +699,7 @@
     <EditText
         android:id="@+id/mapNameOverride"
         style="@style/TextField"
+        android:hint="NULL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
