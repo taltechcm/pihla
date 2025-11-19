@@ -97,6 +97,7 @@ class SettingsActivity : BaseActivity() {
     private lateinit var mainActivityDisplayButtonVideo: CheckBox
     private lateinit var mainActivityDisplayButtonRepose: CheckBox
     private lateinit var mainActivityDisplayButtonPatrol: CheckBox
+    private lateinit var mainActivityDisplayButtonNews: CheckBox
 
     private lateinit var textViewRobotDetails: TextView
 
@@ -172,6 +173,7 @@ class SettingsActivity : BaseActivity() {
         mainActivityDisplayButtonVideo = findViewById(R.id.mainActivityDisplayButtonVideo)
         mainActivityDisplayButtonRepose = findViewById(R.id.mainActivityDisplayButtonRepose)
         mainActivityDisplayButtonPatrol = findViewById(R.id.mainActivityDisplayButtonPatrol)
+        mainActivityDisplayButtonNews = findViewById(R.id.mainActivityDisplayButtonNews)
 
         activationPhrase = findViewById(R.id.activationPhrase)
 
@@ -457,6 +459,13 @@ class SettingsActivity : BaseActivity() {
                 resources.getBoolean(R.bool.mainActivityDisplayButtonPatrol)
             )
 
+        mainActivityDisplayButtonNews.isChecked =
+            SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonNews",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonNews)
+            )
+
 
         activationPhrase.setText(
             SettingsRepository.getLangString(
@@ -684,6 +693,12 @@ class SettingsActivity : BaseActivity() {
             this,
             "mainActivityDisplayButtonPatrol",
             mainActivityDisplayButtonPatrol.isChecked
+        )
+
+        SettingsRepository.setBoolean(
+            this,
+            "mainActivityDisplayButtonNews",
+            mainActivityDisplayButtonNews.isChecked
         )
 
         SettingsRepository.setLangString(

@@ -81,6 +81,8 @@
     <string name="Guide">Navigation guide</string>
     <string name="Video">Training video</string>
     <string name="News">News</string>
+    <string name="TransitPlan">Transit plan</string>
+
     <string name="VideoN">Training video</string>
 
     <string name="Patrol">Tour</string>
@@ -266,6 +268,7 @@
     <string name="personalize_face_detection_messages">Personalize face detection messages</string>
     <string name="show_button_video_on_main_screen">Show button Video on main screen</string>
     <string name="show_button_repose_on_main_screen">Show button Repose on main screen</string>
+    <string name="show_button_news_on_main_screen">Show button News on main screen</string>
     <string name="varia">Varia</string>
     <string name="patrolCheckBoxUseFaceDetectionCustomMessage">Use custom message</string>
     <string name="show_varia_button_in_main_screen">Show \'Varia\' button in main screen</string>

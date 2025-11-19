@@ -58,6 +58,8 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
     private lateinit var buttonRegisterFace: Button
     private lateinit var buttonVideo: Button
+    private lateinit var buttonNews: Button
+    private lateinit var buttonTransitPlan: Button
     private lateinit var buttonPatrol: Button
     private lateinit var reposeButton: Button
 
@@ -97,6 +99,9 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
         buttonRegisterFace = findViewById(R.id.buttonRegisterFace)
         buttonVideo = findViewById(R.id.buttonVideo)
+        buttonNews= findViewById(R.id.buttonNews)
+        buttonTransitPlan = findViewById(R.id.buttonTransitPlan)
+
         reposeButton = findViewById(R.id.reposeButton)
         buttonPatrol = findViewById(R.id.buttonPatrol)
 
@@ -195,6 +200,19 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
             )
         ) View.VISIBLE else View.INVISIBLE
 
+        buttonNews.visibility = if (SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonNews",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonNews)
+            )
+        ) View.VISIBLE else View.INVISIBLE
+
+        buttonTransitPlan.visibility = if (SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonTransitPlan",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonTransitPlan)
+            )
+        ) View.VISIBLE else View.INVISIBLE
         // app.faceDetectionDisabled = false
 
         if (app.locationsRepository != null) {
@@ -811,6 +829,24 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
                 )
                 buttonPatrol.isEnabled = patrolLocations.isNotEmpty()
             }
+        }
+    }
+
+    // open web view to tallinn transit plan mobile view
+    fun buttonTransitPlanClicked(view: View) {
+        startActivityWebView("https://transport.tallinn.ee/mobile.html", true)
+
+        applicationScope.launch {
+            BackendApiKtorSingleton.logEvent(
+                tag = "$TAG.button",
+                message = "buttonTransitPlanClicked"
+            )
+        }
+
+        applicationScope.launch {
+            delay(500L)
+            app.speak(getString(R.string.TransitPlan), false)
+
         }
     }
 

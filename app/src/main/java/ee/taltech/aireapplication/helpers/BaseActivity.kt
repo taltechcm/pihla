@@ -55,8 +55,9 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
     protected var wakeupWordDetected = false
 
 
-    private var  scheduler : ScheduledExecutorService? = null
+    private var scheduler: ScheduledExecutorService? = null
     protected var closeActivityAfterInactivity = true
+
     // TODO: get the delay from settings
     protected var closeActivityAfterInactivityDelay = 30 // in seconds
     private var closeActivityAfterInactivityCounter = closeActivityAfterInactivityDelay
@@ -121,6 +122,7 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
         )
         closeActivityAfterInactivityCounter = closeActivityAfterInactivityDelay
 
+        Log.d(TAG, "closeActivityAfterInactivityDelay: $closeActivityAfterInactivityDelay")
 
     }
 
@@ -386,7 +388,7 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
 
 
     fun startCountdownTimer() {
-        scheduler =  Executors.newScheduledThreadPool(1)
+        scheduler = Executors.newScheduledThreadPool(1)
 
         scheduler?.scheduleWithFixedDelay({
             try {
@@ -395,6 +397,14 @@ open class BaseActivity : AppCompatActivity(), Robot.TtsListener, Robot.AsrListe
 
                 if (closeActivityAfterInactivityCounter <= 0) {
                     scheduler?.shutdownNow()
+
+                    applicationScope.launch {
+                        BackendApiKtorSingleton.logEvent(
+                            tag = "$TAG.CountdownTimer",
+                            message = "Finished, closing activity"
+                        )
+                    }
+
                     finish()
                 }
             } catch (e: Exception) {

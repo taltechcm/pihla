@@ -81,6 +81,21 @@
         app:layout_constraintStart_toEndOf="@+id/buttonGuide"
         app:layout_constraintTop_toTopOf="@+id/buttonGuide" />
 
+
+    <Button
+        android:id="@+id/buttonTransitPlan"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
+        android:layout_marginStart="32dp"
+        android:onClick="buttonTransitPlanClicked"
+        android:text="@string/TransitPlan"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonGuide"
+        app:layout_constraintStart_toEndOf="@+id/buttonGuide"
+        app:layout_constraintTop_toTopOf="@+id/buttonGuide" />
+
+
     <Button
         android:id="@+id/buttonPatrol"
         android:layout_width="300dp"

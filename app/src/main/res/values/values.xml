@@ -18,7 +18,8 @@
     <bool name="mainActivityDisplayButtonVideo">false</bool>
     <bool name="mainActivityDisplayButtonRepose">false</bool>
     <bool name="mainActivityDisplayButtonPatrol">true</bool>
-
+    <bool name="mainActivityDisplayButtonNews">true</bool>
+    <bool name="mainActivityDisplayButtonTransitPlan">true</bool>
     <bool name="gotoLocationCheckboxReturnHome">true</bool>
 
     <bool name="fixAudioVolume">true</bool>

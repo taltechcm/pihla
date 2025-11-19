@@ -80,6 +80,7 @@
 
     <string name="Video">Treening-\nvideo</string>
     <string name="News">Uudised</string>
+    <string name="TransitPlan">Sõidu-\nplaan</string>
     <string name="Patrol">Ringisõit</string>
     <string name="Game1">Arva vanust!</string>
     <string name="Game2">Liitmismäng</string>
@@ -144,6 +145,7 @@
     <string name="show_varia_button_in_main_screen">Kuva nupp \'Varia\' peaekraanil</string>
     <string name="display_button_patrol_on_main_activity">Kuva nupp \'Ringisõit\' avaekraanil</string>
     <string name="show_button_repose_on_main_screen">Kuva nupp \'Repositsioneeri\' avaekraanil</string>
+    <string name="show_button_news_on_main_screen">Kuva nupp \'Uudised\' avaekraanil</string>
     <string name="check_rights">Õigused</string>
     <string name="update">Uuenda</string>
     <string name="take_a_picture">Tee pilt</string>
