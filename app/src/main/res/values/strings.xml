@@ -81,6 +81,8 @@
     <string name="Guide">Navigation guide</string>
     <string name="Video">Training video</string>
     <string name="News">News</string>
+    <string name="TransitPlan">Transit plan</string>
+
     <string name="VideoN">Training video</string>
 
     <string name="Patrol">Tour</string>
