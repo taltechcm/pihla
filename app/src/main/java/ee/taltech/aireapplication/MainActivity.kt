@@ -58,6 +58,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
     private lateinit var buttonRegisterFace: Button
     private lateinit var buttonVideo: Button
+    private lateinit var buttonNews: Button
     private lateinit var buttonPatrol: Button
     private lateinit var reposeButton: Button
 
@@ -97,6 +98,7 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
 
         buttonRegisterFace = findViewById(R.id.buttonRegisterFace)
         buttonVideo = findViewById(R.id.buttonVideo)
+        buttonNews= findViewById(R.id.buttonNews)
         reposeButton = findViewById(R.id.reposeButton)
         buttonPatrol = findViewById(R.id.buttonPatrol)
 
@@ -195,6 +197,12 @@ class MainActivity : BaseActivity(), CustomAsrListener, OnRobotReadyListener {
             )
         ) View.VISIBLE else View.INVISIBLE
 
+        buttonNews.visibility = if (SettingsRepository.getBoolean(
+                this,
+                "mainActivityDisplayButtonNews",
+                resources.getBoolean(R.bool.mainActivityDisplayButtonNews)
+            )
+        ) View.VISIBLE else View.INVISIBLE
         // app.faceDetectionDisabled = false
 
         if (app.locationsRepository != null) {
